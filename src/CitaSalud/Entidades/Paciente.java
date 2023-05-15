@@ -1,25 +1,22 @@
 package CitaSalud.Entidades;
 
-import java.util.List;
-
 /**
  *
  * @author Andres
  */
-public class Medico {
+public class Paciente {
     private String dni;
     private String nombre;
     private String apellido;
-    private String email;
-    private List<Area> area;
-    
+    private String celular;
+
     /**
      * @return the dni
      */
-    private String getDni() {
+    public String getDni() {
         return dni;
     }
-    
+
     /**
      * @param dni the dni to set
      */
@@ -56,30 +53,16 @@ public class Medico {
     }
 
     /**
-     * @return the email
+     * @return the celular
      */
-    public String getEmail() {
-        return email;
+    public String getCelular() {
+        return celular;
     }
 
     /**
-     * @param email the email to set
+     * @param celular the celular to set
      */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return the area
-     */
-    public List<Area> getArea() {
-        return area;
-    }
-
-    /**
-     * @param area the area to set
-     */
-    public void setArea(List<Area> area) {
-        this.area = area;
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 }
