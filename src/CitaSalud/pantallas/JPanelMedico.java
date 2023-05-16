@@ -1,5 +1,17 @@
 package CitaSalud.pantallas;
 
+import CitaSalud.CitaSalud;
+import CitaSalud.Entidades.Area;
+import CitaSalud.Entidades.Medico;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
 /**
  *
  * @author Andres
@@ -11,6 +23,85 @@ public class JPanelMedico extends javax.swing.JPanel {
      */
     public JPanelMedico() {
         initComponents();
+        inicializarComboBox();
+        inicializarTabla();
+        limpiarControles();
+    }
+    
+    private void inicializarComboBox() {
+        cbArea.removeAllItems();
+        
+        for (Area area : CitaSalud.areas) {
+            cbArea.addItem(area.getNombre());
+        }
+    }
+    
+    private void inicializarTabla() {
+        DefaultTableModel model = (DefaultTableModel) tbMedico.getModel();
+        model.setRowCount(0);
+        
+        for (Medico medico : CitaSalud.medicos) {
+            Date fechaActual = new Date();
+            long diferenciaMilisegundos = fechaActual.getTime() - medico.getFechaNacimiento().getTime();
+            long milisegundosPorAnio = 1000L * 60 * 60 * 24 * 365;
+            long edadEnAnios = diferenciaMilisegundos / milisegundosPorAnio;
+
+            Object[] fila = { 
+                medico.getDni(), 
+                medico.getNombre(), 
+                medico.getApellido(),
+                medico.getEmail(),
+                edadEnAnios
+            };
+            
+            model.addRow(fila);
+        }
+        
+        TableColumnModel columnModel = tbMedico.getColumnModel();
+
+        columnModel.getColumn(0).setPreferredWidth(70);
+        columnModel.getColumn(1).setPreferredWidth(150);
+        columnModel.getColumn(2).setPreferredWidth(150);
+        columnModel.getColumn(3).setPreferredWidth(250);
+        columnModel.getColumn(4).setPreferredWidth(70);
+
+        tbMedico.updateUI();
+    }
+    
+    private boolean verificarControlesVacio() {
+
+        String dni = txtDni.getText();
+        String nombres = txtNombres.getText();
+        String apellidos = txtApellidos.getText();
+        String fechaNacimiento = txtFechaNacimiento.getText();
+        String email = txtEmail.getText();
+        
+        
+        if (dni.isEmpty() || 
+                nombres.isEmpty() ||
+                apellidos.isEmpty() ||
+                fechaNacimiento.isEmpty() ||
+                email.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+    
+    private boolean existeMedico(String dni) {
+        for (Medico medico : CitaSalud.medicos) {
+            if (medico.getDni().equals(dni)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private void limpiarControles() {
+        txtDni.setText("");
+        txtNombres.setText("");
+        txtApellidos.setText("");
+        txtEmail.setText("");
+        cbArea.getItemAt(1);
     }
 
     /**
@@ -30,6 +121,8 @@ public class JPanelMedico extends javax.swing.JPanel {
         txtNombres = new javax.swing.JTextField();
         lblApellidos = new javax.swing.JLabel();
         txtApellidos = new javax.swing.JTextField();
+        lblFechaNacimiento = new javax.swing.JLabel();
+        txtFechaNacimiento = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         lblArea = new javax.swing.JLabel();
@@ -38,7 +131,7 @@ public class JPanelMedico extends javax.swing.JPanel {
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblMedico = new javax.swing.JTable();
+        tbMedico = new javax.swing.JTable();
 
         setMaximumSize(new java.awt.Dimension(1200, 900));
         setMinimumSize(new java.awt.Dimension(1200, 900));
@@ -77,6 +170,11 @@ public class JPanelMedico extends javax.swing.JPanel {
 
         txtApellidos.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
+        lblFechaNacimiento.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblFechaNacimiento.setText("FECHA NACIMIENTO:");
+
+        txtFechaNacimiento.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+
         lblEmail.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblEmail.setText("EMAIL:");
 
@@ -91,48 +189,64 @@ public class JPanelMedico extends javax.swing.JPanel {
         btnRegistrar.setBackground(new java.awt.Color(153, 255, 153));
         btnRegistrar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setBackground(new java.awt.Color(255, 255, 204));
         btnEditar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setBackground(new java.awt.Color(255, 204, 204));
         btnEliminar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
-        tblMedico.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        tblMedico.setModel(new javax.swing.table.DefaultTableModel(
+        tbMedico.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tbMedico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "DNI", "NOMBRES", "APELLIDOS", "EMAIL"
+                "DNI", "NOMBRES", "APELLIDOS", "EMAIL", "EDAD"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblMedico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(tblMedico);
+        tbMedico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tbMedico.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tbMedico);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -142,28 +256,35 @@ public class JPanelMedico extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEmail)
-                    .addComponent(cbArea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNombres)
-                    .addComponent(txtApellidos)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDni)
-                            .addComponent(lblNombres)
-                            .addComponent(lblApellidos)
-                            .addComponent(lblEmail)
-                            .addComponent(lblArea)
-                            .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(186, 186, 186)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(154, 154, 154))
+                            .addComponent(txtNombres)
+                            .addComponent(txtApellidos)
+                            .addComponent(txtFechaNacimiento)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cbArea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDni)
+                                    .addComponent(lblNombres)
+                                    .addComponent(lblApellidos)
+                                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblArea))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(72, 72, 72))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFechaNacimiento)
+                            .addComponent(lblEmail))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
             .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
+                .addGap(133, 133, 133)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                    .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -185,23 +306,70 @@ public class JPanelMedico extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblFechaNacimiento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblEmail)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblArea)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblArea)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addComponent(btnRegistrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEliminar)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+        
+        if (verificarControlesVacio()) {
+            JOptionPane.showMessageDialog(this, "Debe completar los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (existeMedico(txtDni.getText())) {
+            JOptionPane.showMessageDialog(this, "El DNI del médico ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            
+            Medico nuevoMedico = new Medico();
+            nuevoMedico.setDni(txtDni.getText());
+            nuevoMedico.setNombre(txtNombres.getText());
+            nuevoMedico.setApellido(txtApellidos.getText());
+
+            try {
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                nuevoMedico.setFechaNacimiento(dateFormat.parse(txtFechaNacimiento.getText()));
+            } catch (ParseException e) {
+
+            }
+
+            nuevoMedico.setEmail(txtEmail.getText());
+
+            for (Area area : CitaSalud.areas) {
+                if (area.getNombre().equals((String)cbArea.getSelectedItem())) {
+                    nuevoMedico.getArea().add(area);
+                }
+            }
+            
+            CitaSalud.medicos.add(nuevoMedico);
+            inicializarTabla();
+            limpiarControles();
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -215,12 +383,14 @@ public class JPanelMedico extends javax.swing.JPanel {
     private javax.swing.JLabel lblArea;
     private javax.swing.JLabel lblDni;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblFechaNacimiento;
     private javax.swing.JLabel lblNombres;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTable tblMedico;
+    private javax.swing.JTable tbMedico;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtFechaNacimiento;
     private javax.swing.JTextField txtNombres;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,5 +1,6 @@
 package CitaSalud.Entidades;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,10 @@ public class Medico {
     private Date fechaNacimiento;
     private String email;
     private List<Area> area;
+    
+    public Medico() {
+        this.area = new ArrayList<>();
+    }
 
     /**
      * @return the dni
