@@ -1,5 +1,7 @@
 package CitaSalud.Entidades;
 
+import java.util.Date;
+
 /**
  *
  * @author Andres
@@ -8,6 +10,7 @@ public class Paciente {
     private String dni;
     private String nombre;
     private String apellido;
+    private Date fechaNacimiento;
     private String celular;
 
     /**
@@ -50,6 +53,20 @@ public class Paciente {
      */
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+    
+    /**
+     * @return the fechaNacimiento
+     */
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    /**
+     * @param fechaNacimiento the fechaNacimiento to set
+     */
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     /**

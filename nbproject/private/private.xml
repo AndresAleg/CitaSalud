@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/sande/source/TPOO/Actividad/CitaSalud/src/JFramePrincipal.java</file>
+            <file>file:/C:/Users/sande/source/TPOO/Actividad/CitaSalud/src/CitaSalud/CitaSalud.java</file>
+            <file>file:/C:/Users/sande/source/TPOO/Actividad/CitaSalud/src/CitaSalud/pantallas/JPanelArea.java</file>
+            <file>file:/C:/Users/sande/source/TPOO/Actividad/CitaSalud/src/CitaSalud/Entidades/Area.java</file>
+            <file>file:/C:/Users/sande/source/TPOO/Actividad/CitaSalud/src/CitaSalud/pantallas/JFramePrincipal.java</file>
+            <file>file:/C:/Users/sande/source/TPOO/Actividad/CitaSalud/src/CitaSalud/pantallas/JPanelMedico.java</file>
         </group>
     </open-files>
 </project-private>
