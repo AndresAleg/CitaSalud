@@ -3,11 +3,12 @@ package CitaSalud.pantallas;
 import CitaSalud.CitaSalud;
 import CitaSalud.Entidades.Area;
 import CitaSalud.Entidades.Medico;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -101,6 +102,7 @@ public class JPanelMedico extends javax.swing.JPanel {
         txtNombres.setText("");
         txtApellidos.setText("");
         txtEmail.setText("");
+        txtFechaNacimiento.setText("dd/MM/yyyy");
         cbArea.getItemAt(1);
     }
 
@@ -246,6 +248,11 @@ public class JPanelMedico extends javax.swing.JPanel {
         });
         tbMedico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tbMedico.getTableHeader().setReorderingAllowed(false);
+        tbMedico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbMedicoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbMedico);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -330,46 +337,105 @@ public class JPanelMedico extends javax.swing.JPanel {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
-        
         if (verificarControlesVacio()) {
             JOptionPane.showMessageDialog(this, "Debe completar los campos.", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (existeMedico(txtDni.getText())) {
-            JOptionPane.showMessageDialog(this, "El DNI del médico ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            
-            Medico nuevoMedico = new Medico();
-            nuevoMedico.setDni(txtDni.getText());
-            nuevoMedico.setNombre(txtNombres.getText());
-            nuevoMedico.setApellido(txtApellidos.getText());
-
-            try {
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                nuevoMedico.setFechaNacimiento(dateFormat.parse(txtFechaNacimiento.getText()));
-            } catch (ParseException e) {
-
-            }
-
-            nuevoMedico.setEmail(txtEmail.getText());
-
-            for (Area area : CitaSalud.areas) {
-                if (area.getNombre().equals((String)cbArea.getSelectedItem())) {
-                    nuevoMedico.getArea().add(area);
-                }
-            }
-            
-            CitaSalud.medicos.add(nuevoMedico);
-            inicializarTabla();
-            limpiarControles();
+            return;
         }
+
+        String dni = txtDni.getText();
+        if (existeMedico(dni)) {
+            JOptionPane.showMessageDialog(this, "El DNI del médico ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        Medico nuevoMedico = new Medico();
+        nuevoMedico.setDni(dni);
+        nuevoMedico.setNombre(txtNombres.getText());
+        nuevoMedico.setApellido(txtApellidos.getText());
+        nuevoMedico.setEmail(txtEmail.getText());
+        
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            nuevoMedico.setFechaNacimiento(dateFormat.parse(txtFechaNacimiento.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(JPanelMedico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+        String nombreArea = (String) cbArea.getSelectedItem();
+        for (Area area : CitaSalud.areas) {
+            if (area.getNombre().equals(nombreArea)) {
+                nuevoMedico.getArea().add(area);
+                break;
+            }
+        }
+
+        CitaSalud.medicos.add(nuevoMedico);
+        inicializarTabla();
+        limpiarControles();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
+        if (verificarControlesVacio()) {
+            JOptionPane.showMessageDialog(this, "Debe completar los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        int indiceFilaSeleccionada = tbMedico.getSelectedRow();
+        
+        if (indiceFilaSeleccionada >= 0) {
+            
+            Medico medicoSeleccionado = CitaSalud.medicos.get(indiceFilaSeleccionada);
+            medicoSeleccionado.setNombre(txtNombres.getText());
+            medicoSeleccionado.setApellido(txtApellidos.getText());
+            medicoSeleccionado.setEmail(txtEmail.getText());
+            
+            try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                medicoSeleccionado.setFechaNacimiento(dateFormat.parse(txtFechaNacimiento.getText()));
+            } catch (ParseException ex) {
+                Logger.getLogger(JPanelMedico.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            inicializarTabla();
+            limpiarControles();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona una fila.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void tbMedicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMedicoMouseClicked
+        // TODO add your handling code here:
+        
+        int filaSeleccionada = tbMedico.getSelectedRow();
+        
+        if (filaSeleccionada != -1) {
+            Object valor = tbMedico.getValueAt(filaSeleccionada, 0);
+            
+            for (Medico medico: CitaSalud.medicos) {
+                if (medico.getDni().equals(valor)) {
+
+                    txtDni.setText(medico.getDni());
+                    txtNombres.setText(medico.getNombre());
+                    txtApellidos.setText(medico.getApellido());
+                    txtEmail.setText(medico.getEmail());
+                    
+                    String fechaString = medico.getFechaNacimiento().toString();
+                    SimpleDateFormat formatoEntrada = new SimpleDateFormat("E MMM dd hh:mm:ss z yyyy", Locale.ENGLISH);
+                    try {
+                        Date fechaFormato = formatoEntrada.parse(fechaString);
+                        SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
+                        txtFechaNacimiento.setText(formatoSalida.format(fechaFormato));
+                    } catch (ParseException ex) {
+                        Logger.getLogger(JPanelMedico.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_tbMedicoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

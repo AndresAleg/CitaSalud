@@ -61,7 +61,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1440, 900));
         setUndecorated(true);
         setOpacity(0.98F);
-        setPreferredSize(new java.awt.Dimension(1440, 900));
         setSize(new java.awt.Dimension(1400, 900));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
