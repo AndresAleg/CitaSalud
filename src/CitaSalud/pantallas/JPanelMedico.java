@@ -187,6 +187,11 @@ public class JPanelMedico extends javax.swing.JPanel {
 
         cbArea.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         cbArea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAreaActionPerformed(evt);
+            }
+        });
 
         btnRegistrar.setBackground(new java.awt.Color(153, 255, 153));
         btnRegistrar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -454,6 +459,10 @@ public class JPanelMedico extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_tbMedicoMouseClicked
+
+    private void cbAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAreaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbAreaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

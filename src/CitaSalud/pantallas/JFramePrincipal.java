@@ -54,10 +54,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
         btnSalir = new javax.swing.JPanel();
         lblIconSalir = new javax.swing.JLabel();
         lblSalir = new javax.swing.JLabel();
+        btnVisualizar = new javax.swing.JPanel();
+        lblConsultorio3 = new javax.swing.JLabel();
+        lblIconConsultorio3 = new javax.swing.JLabel();
         Ventana = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1440, 900));
         setMinimumSize(new java.awt.Dimension(1440, 900));
         setUndecorated(true);
         setOpacity(0.98F);
@@ -315,13 +317,46 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnVisualizar.setBackground(new java.awt.Color(32, 34, 75));
+        btnVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVisualizarMouseClicked(evt);
+            }
+        });
+
+        lblConsultorio3.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
+        lblConsultorio3.setForeground(new java.awt.Color(255, 255, 255));
+        lblConsultorio3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblConsultorio3.setText("VISUALIZACION");
+
+        lblIconConsultorio3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIconConsultorio3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/buscar48.png"))); // NOI18N
+
+        javax.swing.GroupLayout btnVisualizarLayout = new javax.swing.GroupLayout(btnVisualizar);
+        btnVisualizar.setLayout(btnVisualizarLayout);
+        btnVisualizarLayout.setHorizontalGroup(
+            btnVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnVisualizarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblIconConsultorio3)
+                .addGap(18, 18, 18)
+                .addComponent(lblConsultorio3)
+                .addContainerGap())
+        );
+        btnVisualizarLayout.setVerticalGroup(
+            btnVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnVisualizarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(btnVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblIconConsultorio3)
+                    .addComponent(lblConsultorio3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MenuLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(btnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnMedico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnPaciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -329,6 +364,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
             .addComponent(btnConsultorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(MenuLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(btnVisualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,16 +379,19 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(btnMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(btnCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(btnConsultorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         getContentPane().add(Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 900));
@@ -424,6 +467,17 @@ public class JFramePrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAreaMouseClicked
 
+    private void btnVisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVisualizarMouseClicked
+        JPanelVisualizar pVisualizar = new JPanelVisualizar();
+        pVisualizar.setSize(1200, 900);
+        pVisualizar.setLocation(0, 0);
+        
+        Ventana.removeAll();
+        Ventana.add(pVisualizar);
+        Ventana.revalidate();
+        Ventana.repaint();
+    }//GEN-LAST:event_btnVisualizarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -469,13 +523,16 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel btnMedico;
     private javax.swing.JPanel btnPaciente;
     private javax.swing.JPanel btnSalir;
+    private javax.swing.JPanel btnVisualizar;
     private javax.swing.JLabel lblArea;
     private javax.swing.JLabel lblCita;
     private javax.swing.JLabel lblConsultorio;
+    private javax.swing.JLabel lblConsultorio3;
     private javax.swing.JLabel lblHome;
     private javax.swing.JLabel lblIconArea;
     private javax.swing.JLabel lblIconCita;
     private javax.swing.JLabel lblIconConsultorio;
+    private javax.swing.JLabel lblIconConsultorio3;
     private javax.swing.JLabel lblIconHome;
     private javax.swing.JLabel lblIconMedico;
     private javax.swing.JLabel lblIconPaciente;
