@@ -1,6 +1,7 @@
 package CitaSalud;
 
 import CitaSalud.Entidades.Area;
+import CitaSalud.Entidades.Medicamento;
 import CitaSalud.Entidades.Medico;
 import CitaSalud.Entidades.Paciente;
 import CitaSalud.pantallas.JFramePrincipal;
@@ -15,6 +16,10 @@ public class CitaSalud {
     public static List<Medico> medicos = new ArrayList<>();
     public static List<Paciente> pacientes = new ArrayList<>();
     public static List<Area> areas = new ArrayList<>();
+    public static List<Medicamento> medicamentos = new ArrayList<>();
+    
+    
+    
     
     /**
      * @param args the command line arguments

@@ -57,6 +57,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
         btnVisualizar = new javax.swing.JPanel();
         lblConsultorio3 = new javax.swing.JLabel();
         lblIconConsultorio3 = new javax.swing.JLabel();
+        btnMedicamento = new javax.swing.JPanel();
+        lblIconMedicamento = new javax.swing.JLabel();
+        lblMedicamento = new javax.swing.JLabel();
         Ventana = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -353,6 +356,41 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnMedicamento.setBackground(new java.awt.Color(32, 34, 75));
+        btnMedicamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMedicamentoMouseClicked(evt);
+            }
+        });
+
+        lblIconMedicamento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIconMedicamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/medicamento32.png"))); // NOI18N
+
+        lblMedicamento.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
+        lblMedicamento.setForeground(new java.awt.Color(255, 255, 255));
+        lblMedicamento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMedicamento.setText("MEDICAMENTO");
+
+        javax.swing.GroupLayout btnMedicamentoLayout = new javax.swing.GroupLayout(btnMedicamento);
+        btnMedicamento.setLayout(btnMedicamentoLayout);
+        btnMedicamentoLayout.setHorizontalGroup(
+            btnMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnMedicamentoLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(lblIconMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+        );
+        btnMedicamentoLayout.setVerticalGroup(
+            btnMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnMedicamentoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(btnMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblIconMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
@@ -369,6 +407,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(btnVisualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnMedicamento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,6 +429,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -478,6 +519,20 @@ public class JFramePrincipal extends javax.swing.JFrame {
         Ventana.repaint();
     }//GEN-LAST:event_btnVisualizarMouseClicked
 
+    private void btnMedicamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMedicamentoMouseClicked
+   
+        JPanelMedicamento pMedicamento = new JPanelMedicamento();
+        pMedicamento.setSize(1200, 900);
+        pMedicamento.setLocation(0, 0);
+        
+        Ventana.removeAll();
+        Ventana.add(pMedicamento);
+        Ventana.revalidate();
+        Ventana.repaint();
+        
+        
+    }//GEN-LAST:event_btnMedicamentoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -520,6 +575,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel btnCita;
     private javax.swing.JPanel btnConsultorio;
     private javax.swing.JPanel btnHome;
+    private javax.swing.JPanel btnMedicamento;
     private javax.swing.JPanel btnMedico;
     private javax.swing.JPanel btnPaciente;
     private javax.swing.JPanel btnSalir;
@@ -534,10 +590,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblIconConsultorio;
     private javax.swing.JLabel lblIconConsultorio3;
     private javax.swing.JLabel lblIconHome;
+    private javax.swing.JLabel lblIconMedicamento;
     private javax.swing.JLabel lblIconMedico;
     private javax.swing.JLabel lblIconPaciente;
     private javax.swing.JLabel lblIconSalir;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblMedicamento;
     private javax.swing.JLabel lblMedico;
     private javax.swing.JLabel lblPaciente;
     private javax.swing.JLabel lblSalir;
