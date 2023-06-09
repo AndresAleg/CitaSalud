@@ -24,6 +24,7 @@ public class JPanelMedico extends javax.swing.JPanel {
      */
     public JPanelMedico() {
         initComponents();
+        CitaSalud.medicos = Medico.cargarArchivoDeTexto();
         inicializarComboBox();
         inicializarTabla();
         limpiarControles();
@@ -375,6 +376,7 @@ public class JPanelMedico extends javax.swing.JPanel {
         }
 
         CitaSalud.medicos.add(nuevoMedico);
+        Medico.actualizar(CitaSalud.medicos);
         inicializarTabla();
         limpiarControles();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -401,6 +403,7 @@ public class JPanelMedico extends javax.swing.JPanel {
             } catch (ParseException ex) {
                 Logger.getLogger(JPanelMedico.class.getName()).log(Level.SEVERE, null, ex);
             }
+            Medico.actualizar(CitaSalud.medicos);
             inicializarTabla();
             limpiarControles();
         } else {
@@ -422,6 +425,7 @@ public class JPanelMedico extends javax.swing.JPanel {
                         break;
                     }
                 }
+                Medico.actualizar(CitaSalud.medicos);
                 inicializarTabla();
                 limpiarControles();
             }
