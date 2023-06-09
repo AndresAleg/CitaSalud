@@ -3,6 +3,7 @@ package CitaSalud.pantallas;
 import CitaSalud.CitaSalud;
 import CitaSalud.Entidades.Area;
 import CitaSalud.Entidades.Medico;
+import CitaSalud.Entidades.Paciente;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 
@@ -22,6 +23,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
         initComponents();
         CitaSalud.areas = Area.cargarArchivoDeTexto();
         CitaSalud.medicos = Medico.cargarArchivoDeTexto();
+        CitaSalud.pacientes = Paciente.cargarArchivoDeTexto();
+        
+        for (Paciente paciente : CitaSalud.pacientes) {
+            System.out.println("nombre: " + paciente.getDni());
+            System.out.println("apellido: " + paciente.getApellido());
+        }
         Ventana.removeAll();
         Ventana.revalidate();
         Ventana.repaint();
