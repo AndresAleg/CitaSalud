@@ -14,6 +14,7 @@ public class JPanelArea extends javax.swing.JPanel {
     /** Creates new form JPanelArea */
     public JPanelArea() {
         initComponents();
+        CitaSalud.areas = Area.cargarArchivoDeTexto();
         inicializarTabla();
     }
     
@@ -240,6 +241,7 @@ public class JPanelArea extends javax.swing.JPanel {
             nuevoArea.setDescripcion(descripcion);
 
             CitaSalud.areas.add(nuevoArea);
+            Area.actualizar(CitaSalud.areas);
             inicializarTabla();
             limpiarControles();
         }
@@ -257,7 +259,7 @@ public class JPanelArea extends javax.swing.JPanel {
             Area areaSeleccionada = CitaSalud.areas.get(indiceFilaSeleccionada);
             areaSeleccionada.setNombre(nombre);
             areaSeleccionada.setDescripcion(descripcion);
-            
+            Area.actualizar(CitaSalud.areas);
             inicializarTabla();
             limpiarControles();
         } else {
@@ -279,6 +281,7 @@ public class JPanelArea extends javax.swing.JPanel {
                        break;
                    }
                }
+               Area.actualizar(CitaSalud.areas);
                inicializarTabla();
                limpiarControles();
            }

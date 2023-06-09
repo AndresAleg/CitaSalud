@@ -13,11 +13,11 @@ import java.util.List;
  * @autor Andres
  */
 public class CitaSalud {
+    
     public static List<Medico> medicos = new ArrayList<>();
     public static List<Paciente> pacientes = new ArrayList<>();
     public static List<Area> areas = new ArrayList<>();
     public static List<Medicamento> medicamentos = new ArrayList<>();
-    
     
     
     
