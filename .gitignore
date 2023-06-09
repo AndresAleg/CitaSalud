@@ -1,8 +1,27 @@
-**/nbproject/private/
-**/nbproject/Makefile-*.mk
-**/nbproject/Package-*.bash
+# NetBeans project files
+nbproject/
+nbactions.xml
+nb-configuration.xml
+
+# Compiled files
 build/
-nbbuild/
 dist/
+
+
+# Javadoc
+dist/javadoc/
+
+# Libraries
+lib/
+
+# Other generated files
+**/gen-*/
+
+# IDE files
+*.iml
+nb-gradle/
+nbbuild/
 nbdist/
 .nb-gradle/
+nbproject/private/
+build.xml
