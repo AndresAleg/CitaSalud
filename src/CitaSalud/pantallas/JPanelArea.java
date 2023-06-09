@@ -14,7 +14,6 @@ public class JPanelArea extends javax.swing.JPanel {
     /** Creates new form JPanelArea */
     public JPanelArea() {
         initComponents();
-        CitaSalud.areas = Area.cargarArchivoDeTexto();
         inicializarTabla();
     }
     

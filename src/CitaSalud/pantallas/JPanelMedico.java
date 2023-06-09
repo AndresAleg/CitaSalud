@@ -24,7 +24,6 @@ public class JPanelMedico extends javax.swing.JPanel {
      */
     public JPanelMedico() {
         initComponents();
-        CitaSalud.medicos = Medico.cargarArchivoDeTexto();
         inicializarComboBox();
         inicializarTabla();
         limpiarControles();
