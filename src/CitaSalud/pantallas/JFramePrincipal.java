@@ -568,6 +568,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     private void btnCitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCitaMouseClicked
         // TODO add your handling code here:
+        JPanelCita pCita = new JPanelCita();
+        pCita.setSize(1200, 900);
+        pCita.setLocation(0, 0);
+        
+        Ventana.removeAll();
+        Ventana.add(pCita);
+        Ventana.revalidate();
+        Ventana.repaint();
     }//GEN-LAST:event_btnCitaMouseClicked
 
     private void btnPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPacienteMouseClicked

@@ -1,13 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package CitaSalud.pantallas;
+
+import CitaSalud.Entidades.Paciente;
+import CitaSalud.CitaSalud;
+import CitaSalud.Entidades.Area;
+import CitaSalud.Entidades.Medico;
 
 /**
  *
- * @author Estudiante
+ * @author Andres
  */
 public class JPanelCita extends javax.swing.JPanel {
 
@@ -16,6 +16,33 @@ public class JPanelCita extends javax.swing.JPanel {
      */
     public JPanelCita() {
         initComponents();
+        inicializarCbPaciente();
+        inicializarCbArea();
+        inicializarCbMedico();
+    }
+    
+    public void inicializarCbPaciente() {
+        cbPaciente.removeAllItems();
+        for (Paciente paciente : CitaSalud.pacientes) {
+            
+            cbPaciente.addItem(paciente.getNombre() + " " + paciente.getApellido());
+        }
+    }
+    
+    public void inicializarCbArea() {
+        cbArea.removeAllItems();
+        for (Area area : CitaSalud.areas) {
+            
+            cbArea.addItem(area.getNombre());
+        }
+    }
+    
+    public void inicializarCbMedico() {
+        cbMedico.removeAllItems();
+        for (Medico medico : CitaSalud.medicos) {
+            
+            cbMedico.addItem(medico.getNombre() + " " + medico.getApellido());
+        }
     }
 
     /**
@@ -244,31 +271,6 @@ public class JPanelCita extends javax.swing.JPanel {
     private void tbMedicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMedicoMouseClicked
         // TODO add your handling code here:
 
-        int filaSeleccionada = tbMedico.getSelectedRow();
-
-        if (filaSeleccionada != -1) {
-            Object valor = tbMedico.getValueAt(filaSeleccionada, 0);
-
-            for (Medico medico: CitaSalud.medicos) {
-                if (medico.getDni().equals(valor)) {
-
-                    txtDni.setText(medico.getDni());
-                    txtNombres.setText(medico.getNombre());
-                    txtApellidos.setText(medico.getApellido());
-                    txtEmail.setText(medico.getEmail());
-
-                    String fechaString = medico.getFechaNacimiento().toString();
-                    SimpleDateFormat formatoEntrada = new SimpleDateFormat("E MMM dd hh:mm:ss z yyyy", Locale.ENGLISH);
-                    try {
-                        Date fechaFormato = formatoEntrada.parse(fechaString);
-                        SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
-                        txtFechaNacimiento.setText(formatoSalida.format(fechaFormato));
-                    } catch (ParseException ex) {
-                        Logger.getLogger(JPanelMedico.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        }
     }//GEN-LAST:event_tbMedicoMouseClicked
 
 
