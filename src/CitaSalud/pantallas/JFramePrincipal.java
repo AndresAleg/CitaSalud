@@ -333,15 +333,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
         lblConsultorio3.setText("VISUALIZACION");
 
         lblIconConsultorio3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIconConsultorio3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/buscar48.png"))); // NOI18N
+        lblIconConsultorio3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/visualizacion32.png"))); // NOI18N
 
         javax.swing.GroupLayout btnVisualizarLayout = new javax.swing.GroupLayout(btnVisualizar);
         btnVisualizar.setLayout(btnVisualizarLayout);
         btnVisualizarLayout.setHorizontalGroup(
             btnVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnVisualizarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblIconConsultorio3)
+                .addComponent(lblIconConsultorio3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(lblConsultorio3)
                 .addContainerGap())
