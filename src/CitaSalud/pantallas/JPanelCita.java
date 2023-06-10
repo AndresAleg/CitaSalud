@@ -2,6 +2,7 @@ package CitaSalud.pantallas;
 
 import CitaSalud.Entidades.Paciente;
 import CitaSalud.CitaSalud;
+import static CitaSalud.CitaSalud.citas;
 import CitaSalud.Entidades.Area;
 import CitaSalud.Entidades.Cita;
 import CitaSalud.Entidades.Medico;
@@ -390,7 +391,7 @@ public class JPanelCita extends javax.swing.JPanel {
         if (nuevaCita.validarFormatoFecha()) {
             if (nuevaCita.validarFormatoHora()){
                 CitaSalud.citas.add(nuevaCita);
-                
+                Cita.actualizar(citas);
                 inicializarTabla();
                 limpiarControles();
                 return;
@@ -417,6 +418,7 @@ public class JPanelCita extends javax.swing.JPanel {
                         break;
                     }
                 }
+                Cita.actualizar(citas);
                 inicializarTabla();
                 limpiarControles();
             }

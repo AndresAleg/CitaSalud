@@ -1,5 +1,15 @@
 package CitaSalud.Entidades;
 
+import CitaSalud.CitaSalud;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -133,6 +143,74 @@ public class Cita {
             return true;
         } catch (DateTimeParseException e) {
             return false;
+        }
+    }
+    
+    public static List<Cita> cargarArchivoDeTexto() {
+        List<Cita> citas = new ArrayList<>();
+        Path filePath = Paths.get("src/CitaSalud/Archivos/citas.txt");
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
+            
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] campos = linea.split(";");
+                Cita cita = new Cita();
+                
+                cita.setCodigo(campos[0]);
+                
+                for (Paciente paciente : CitaSalud.pacientes) {
+                    if ((paciente.getNombre() + " " + paciente.getApellido())
+                            .equals(campos[1])) {
+                        cita.setPaciente(paciente);
+                        break;
+                    }
+                }
+                
+                for (Area area : CitaSalud.areas) {
+                    if ((area.getNombre().equals(campos[2]))) {
+                        cita.setArea(area);
+                        break;
+                    }
+                }
+                
+                for (Medico medico : CitaSalud.medicos) {
+                    if ((medico.getNombre() + " " + medico.getApellido())
+                            .equals(campos[3])) {
+                        cita.setMedico(medico);
+                    }
+                }
+                
+                cita.setFecha(campos[4]);
+                cita.setHora(campos[5]);
+                cita.setAtendido(Boolean.parseBoolean(campos[6]));
+                citas.add(cita);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return citas;
+    }
+    
+    public static void actualizar(List<Cita> citas) {
+        Path filePath = Paths.get("src/CitaSalud/Archivos/citas.txt");
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()))) {
+            for (Cita cita : citas) {
+                writer.write(cita.getCodigo() + ";");
+                writer.write(cita.getPaciente().getNombre() 
+                        + " " 
+                        + cita.getPaciente().getApellido() + ";");
+                writer.write(cita.getArea().getNombre() + ";");
+                writer.write(cita.getMedico().getNombre()
+                        + " " 
+                        + cita.getMedico().getApellido() + ";");
+                writer.write(cita.getFecha() + ";");
+                writer.write(cita.getHora() + ";");
+                writer.write(cita.getAtendido().toString() + System.lineSeparator());
+            } 
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
