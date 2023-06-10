@@ -3,7 +3,10 @@ package CitaSalud.pantallas;
 import CitaSalud.Entidades.Paciente;
 import CitaSalud.CitaSalud;
 import CitaSalud.Entidades.Area;
+import CitaSalud.Entidades.Cita;
 import CitaSalud.Entidades.Medico;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,9 +22,10 @@ public class JPanelCita extends javax.swing.JPanel {
         inicializarCbPaciente();
         inicializarCbArea();
         inicializarCbMedico();
+        inicializarTabla();
     }
     
-    public void inicializarCbPaciente() {
+    private void inicializarCbPaciente() {
         cbPaciente.removeAllItems();
         for (Paciente paciente : CitaSalud.pacientes) {
             
@@ -29,7 +33,7 @@ public class JPanelCita extends javax.swing.JPanel {
         }
     }
     
-    public void inicializarCbArea() {
+    private void inicializarCbArea() {
         cbArea.removeAllItems();
         for (Area area : CitaSalud.areas) {
             
@@ -37,12 +41,40 @@ public class JPanelCita extends javax.swing.JPanel {
         }
     }
     
-    public void inicializarCbMedico() {
+    private void inicializarCbMedico() {
         cbMedico.removeAllItems();
         for (Medico medico : CitaSalud.medicos) {
             
-            cbMedico.addItem(medico.getNombre() + " " + medico.getApellido());
+            if (cbArea.getSelectedItem().equals(medico.getArea().get(0).getNombre())){
+                cbMedico.addItem(medico.getNombre() + " " + medico.getApellido());
+            }
         }
+    }
+    
+    private void inicializarTabla() {
+        
+        DefaultTableModel model = (DefaultTableModel) tbCita.getModel();
+        model.setRowCount(0);
+        
+        for (Cita cita : CitaSalud.citas) {
+            
+            if (!cita.getAtendido()) {
+                Object[] fila = { 
+                    cita.getCodigo(), 
+                    cita.getPaciente().getNombre() + " " + cita.getPaciente().getApellido(),
+                    cita.getArea().getNombre(),
+                    cita.getFecha(),
+                    cita.getHora(),
+                    cita.getMedico().getNombre() + " " + cita.getMedico().getApellido()
+                };
+                model.addRow(fila);
+            }
+        }
+    }
+    
+    private void limpiarControles() {
+        txtFecha.setText("dd/MM/yyyy");
+        txtHora.setText("HH:mm");
     }
 
     /**
@@ -60,14 +92,14 @@ public class JPanelCita extends javax.swing.JPanel {
         cbArea = new javax.swing.JComboBox<>();
         lblMedico = new javax.swing.JLabel();
         cbMedico = new javax.swing.JComboBox<>();
-        lblMedico1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        lblMedico2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        lblFecha = new javax.swing.JLabel();
+        txtFecha = new javax.swing.JTextField();
+        lblHora = new javax.swing.JLabel();
+        txtHora = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbMedico = new javax.swing.JTable();
+        tbCita = new javax.swing.JTable();
 
         setMaximumSize(new java.awt.Dimension(1200, 900));
         setMinimumSize(new java.awt.Dimension(1200, 900));
@@ -102,23 +134,28 @@ public class JPanelCita extends javax.swing.JPanel {
         lblArea.setText("Área:");
 
         cbArea.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        cbArea.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbAreaItemStateChanged(evt);
+            }
+        });
 
         lblMedico.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblMedico.setText("Médico:");
 
         cbMedico.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
-        lblMedico1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblMedico1.setText("Fecha:");
+        lblFecha.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblFecha.setText("Fecha:");
 
-        jTextField1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jTextField1.setText("dd/MM/yyyy");
+        txtFecha.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtFecha.setText("dd/MM/yyyy");
 
-        lblMedico2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblMedico2.setText("Hora:");
+        lblHora.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblHora.setText("Hora:");
 
-        jTextField2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jTextField2.setText("hh:mm");
+        txtHora.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtHora.setText("HH:mm");
 
         btnRegistrar.setBackground(new java.awt.Color(153, 255, 153));
         btnRegistrar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -138,8 +175,8 @@ public class JPanelCita extends javax.swing.JPanel {
             }
         });
 
-        tbMedico.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tbMedico.setModel(new javax.swing.table.DefaultTableModel(
+        tbCita.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tbCita.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -169,14 +206,14 @@ public class JPanelCita extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tbMedico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tbMedico.getTableHeader().setReorderingAllowed(false);
-        tbMedico.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbCita.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tbCita.getTableHeader().setReorderingAllowed(false);
+        tbCita.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbMedicoMouseClicked(evt);
+                tbCitaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbMedico);
+        jScrollPane1.setViewportView(tbCita);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -184,42 +221,41 @@ public class JPanelCita extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Encabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(154, 154, 154)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(cbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(41, 41, 41)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(cbArea, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(37, 37, 37)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(cbMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(42, 42, 42)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(385, 385, 385)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblMedico1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(46, 46, 46)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblMedico2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(266, 266, 266)))
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(41, 41, 41)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbArea, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(385, 385, 385)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(46, 46, 46)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,12 +277,12 @@ public class JPanelCita extends javax.swing.JPanel {
                         .addComponent(cbArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblMedico1)
-                            .addComponent(lblMedico2))
+                            .addComponent(lblFecha)
+                            .addComponent(lblHora))
                         .addGap(37, 37, 37)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -259,8 +295,60 @@ public class JPanelCita extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
+        
+        Cita nuevaCita = new Cita();
+        
+        if (!CitaSalud.citas.isEmpty()) {
+            Cita ultimaCita = CitaSalud.citas.get(CitaSalud.citas.size() - 1);
+            String ultimoCodigo = ultimaCita.getCodigo();
+            int numero = Integer.parseInt(ultimoCodigo.substring(1)) + 1;
+            String nuevoCodigo = "C" + String.format("%07d", numero);
+            nuevaCita.setCodigo(nuevoCodigo);
+        } else {
+            nuevaCita.setCodigo("C0000001");
+        }
+        
+        for (Paciente paciente : CitaSalud.pacientes) {
+            if ((paciente.getNombre() + " " + paciente.getApellido())
+                    .equals(cbPaciente.getSelectedItem())) {
+                nuevaCita.setPaciente(paciente);
+                break;
+            }
+        }
+        
+        for (Area area : CitaSalud.areas) {
+            if (area.getNombre()
+                    .equals(cbArea.getSelectedItem())) {
+                nuevaCita.setArea(area);
+                break;
+            }
+        }
 
+        for (Medico medico : CitaSalud.medicos) {
+            if ((medico.getNombre() + " " + medico.getApellido())
+                    .equals(cbMedico.getSelectedItem())) {
+                nuevaCita.setMedico(medico);
+                break;
+            }
+        }
+        
+        nuevaCita.setFecha(txtFecha.getText());
+        nuevaCita.setHora(txtHora.getText());
+        
+        if (nuevaCita.validarFormatoFecha()) {
+            if (nuevaCita.validarFormatoHora()){
+                CitaSalud.citas.add(nuevaCita);
+                
+                inicializarTabla();
+                limpiarControles();
+                return;
+            }
+            JOptionPane.showMessageDialog(null, "El formato de fecha es incorrecto.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "El formato de hora es incorrecto.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+        return;
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -268,10 +356,20 @@ public class JPanelCita extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void tbMedicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMedicoMouseClicked
+    private void tbCitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCitaMouseClicked
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_tbMedicoMouseClicked
+    }//GEN-LAST:event_tbCitaMouseClicked
+
+    private void cbAreaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAreaItemStateChanged
+        cbMedico.removeAllItems();
+        for (Medico medico : CitaSalud.medicos) {
+            
+            if (cbArea.getSelectedItem().equals(medico.getArea().get(0).getNombre())){
+                cbMedico.addItem(medico.getNombre() + " " + medico.getApellido());
+            }
+        }
+    }//GEN-LAST:event_cbAreaItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -282,14 +380,14 @@ public class JPanelCita extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbMedico;
     private javax.swing.JComboBox<String> cbPaciente;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblArea;
+    private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblMedico;
-    private javax.swing.JLabel lblMedico1;
-    private javax.swing.JLabel lblMedico2;
     private javax.swing.JLabel lblPaciente;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTable tbMedico;
+    private javax.swing.JTable tbCita;
+    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtHora;
     // End of variables declaration//GEN-END:variables
 }

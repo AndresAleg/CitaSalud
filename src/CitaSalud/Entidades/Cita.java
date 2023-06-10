@@ -1,17 +1,36 @@
 package CitaSalud.Entidades;
 
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  *
  * @author Andres
  */
 public class Cita {
+    
+    private String codigo;
     private Paciente paciente;
     private Area area;
     private Medico medico;
-    private Date fecha;
-    private int hora;
+    private String fecha;
+    private String hora;
+    private Boolean atendido = false;
+    
+    
+    /**
+     * @return the codigo
+     */
+    public String getCodigo() {
+        return codigo;
+    }
+
+    /**
+     * @param codigo the codigo to set
+     */
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
     /**
      * @return the paciente
@@ -58,28 +77,62 @@ public class Cita {
     /**
      * @return the fecha
      */
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
     /**
      * @param fecha the fecha to set
      */
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
     /**
      * @return the hora
      */
-    public int getHora() {
+    public String getHora() {
         return hora;
     }
 
     /**
      * @param hora the hora to set
      */
-    public void setHora(int hora) {
+    public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    /**
+     * @return the atendido
+     */
+    public Boolean getAtendido() {
+        return atendido;
+    }
+
+    /**
+     * @param atendido the activo to set
+     */
+    public void setAtendido(Boolean atendido) {
+        this.atendido = atendido;
+    }
+    
+    public boolean validarFormatoFecha() {
+        try {
+            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            formatoFecha.parse(fecha);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+    
+    public boolean validarFormatoHora() {
+        try {
+            DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
+            formatoHora.parse(hora);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 }

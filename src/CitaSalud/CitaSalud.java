@@ -1,6 +1,7 @@
 package CitaSalud;
 
 import CitaSalud.Entidades.Area;
+import CitaSalud.Entidades.Cita;
 import CitaSalud.Entidades.Medicamento;
 import CitaSalud.Entidades.Medico;
 import CitaSalud.Entidades.Paciente;
@@ -18,6 +19,7 @@ public class CitaSalud {
     public static List<Paciente> pacientes = new ArrayList<>();
     public static List<Area> areas = new ArrayList<>();
     public static List<Medicamento> medicamentos = new ArrayList<>();
+    public static List<Cita> citas = new ArrayList<>();
     
     
     
