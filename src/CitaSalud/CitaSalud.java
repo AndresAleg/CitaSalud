@@ -5,7 +5,8 @@ import CitaSalud.Entidades.Cita;
 import CitaSalud.Entidades.Medicamento;
 import CitaSalud.Entidades.Medico;
 import CitaSalud.Entidades.Paciente;
-import CitaSalud.pantallas.JFramePrincipal;
+import CitaSalud.Entidades.Usuario;
+import CitaSalud.pantallas.JFrameLogin;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class CitaSalud {
     public static List<Area> areas = new ArrayList<>();
     public static List<Medicamento> medicamentos = new ArrayList<>();
     public static List<Cita> citas = new ArrayList<>();
+    public static Usuario usuario = new Usuario();
     
     
     
@@ -29,7 +31,7 @@ public class CitaSalud {
     public static void main(String[] args) {
         
         // Abrir JFramePrincipal:
-        JFramePrincipal framePrincipal = new JFramePrincipal();
-        framePrincipal.setVisible(true);
+        JFrameLogin frameLogin = new JFrameLogin();
+        frameLogin.setVisible(true);
     }
 }

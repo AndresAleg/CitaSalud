@@ -28,7 +28,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
         CitaSalud.citas = Cita.cargarArchivoDeTexto();
         
  
+        JPanelHome pHome = new JPanelHome();
+        pHome.setSize(1200, 900);
+        pHome.setLocation(0, 0);
+        
         Ventana.removeAll();
+        Ventana.add(pHome);
         Ventana.revalidate();
         Ventana.repaint();
     }
@@ -595,7 +600,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
         // TODO add your handling code here:
+        JPanelHome pHome = new JPanelHome();
+        pHome.setSize(1200, 900);
+        pHome.setLocation(0, 0);
+        
         Ventana.removeAll();
+        Ventana.add(pHome);
         Ventana.revalidate();
         Ventana.repaint();
     }//GEN-LAST:event_btnHomeMouseClicked
