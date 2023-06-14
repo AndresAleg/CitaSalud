@@ -30,6 +30,9 @@ public class CitaSalud {
      */
     public static void main(String[] args) {
         
+        String url = "jdbc:sqlserver://citasalud.database.windows.net:1433;database=citasalud;user=vieweruser;password=Lovejava123;";
+        System.setProperty("url", url);
+        
         // Abrir JFramePrincipal:
         JFrameLogin frameLogin = new JFrameLogin();
         frameLogin.setVisible(true);

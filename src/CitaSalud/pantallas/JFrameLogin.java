@@ -92,7 +92,7 @@ public class JFrameLogin extends javax.swing.JFrame {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
 
-        String url = "jdbc:sqlserver://citasalud.database.windows.net:1433;database=citasalud;user=administrador;password=Torreja123;";
+        String url = System.getProperty("url");
         String query = "SELECT username, role FROM users WHERE username = ? AND password = ?";
 
         try (Connection connection = DriverManager.getConnection(url);
