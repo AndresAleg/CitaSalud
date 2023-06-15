@@ -1,9 +1,5 @@
 package CitaSalud.Entidades;
 
-/**
- *
- * @author Andres
- */
 public class Consultorio {
    private Cita cita;
    private String motivo;
