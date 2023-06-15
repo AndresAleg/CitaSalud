@@ -76,4 +76,12 @@ public class Consultorio {
     public void setMedicacion(String medicacion) {
         this.medicacion = medicacion;
     }
+
+    public String getNombre() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getApellido() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
