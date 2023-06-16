@@ -160,7 +160,7 @@ public class Cita {
                 cita.setCodigo(campos[0]);
                 
                 for (Paciente paciente : CitaSalud.pacientes) {
-                    if ((paciente.getNombre() + " " + paciente.getApellido())
+                    if ((paciente.getDni())
                             .equals(campos[1])) {
                         cita.setPaciente(paciente);
                         break;
@@ -175,7 +175,7 @@ public class Cita {
                 }
                 
                 for (Medico medico : CitaSalud.medicos) {
-                    if ((medico.getNombre() + " " + medico.getApellido())
+                    if ((medico.getDni())
                             .equals(campos[3])) {
                         cita.setMedico(medico);
                     }
@@ -198,13 +198,9 @@ public class Cita {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()))) {
             for (Cita cita : citas) {
                 writer.write(cita.getCodigo() + ";");
-                writer.write(cita.getPaciente().getNombre() 
-                        + " " 
-                        + cita.getPaciente().getApellido() + ";");
+                writer.write(cita.getPaciente().getDni() + ";");
                 writer.write(cita.getArea().getNombre() + ";");
-                writer.write(cita.getMedico().getNombre()
-                        + " " 
-                        + cita.getMedico().getApellido() + ";");
+                writer.write(cita.getMedico().getDni() + ";");
                 writer.write(cita.getFecha() + ";");
                 writer.write(cita.getHora() + ";");
                 writer.write(cita.getAtendido().toString() + System.lineSeparator());

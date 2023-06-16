@@ -1,3 +1,1 @@
-C0000001;Carlos Rodríguez;Radiología;Pablo Morales;13/05/2023;15:30;false
-C0000002;David Hernández;Oftalmología;Sergio Ramírez;13/05/2023;16:30;false
-C0000003;Sofía Delgado;Cardiología;Carlos López;13/05/2023;17:30;false
+C0000001;78901234;Medicina interna;56789012;13/05/2023;15:35;false

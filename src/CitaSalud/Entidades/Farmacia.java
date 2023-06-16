@@ -30,5 +30,13 @@ public class Farmacia {
     public void setConsultorio(Consultorio consultorio) {
         this.consultorio = consultorio;
     }
+
+    public boolean getAtendido() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Object getNombre() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

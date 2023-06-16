@@ -363,7 +363,8 @@ public class JPanelMedico extends javax.swing.JPanel {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             nuevoMedico.setFechaNacimiento(dateFormat.parse(txtFechaNacimiento.getText()));
         } catch (ParseException ex) {
-            Logger.getLogger(JPanelMedico.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "El formato de fecha es incorrecto.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+            return;
         }
  
         String nombreArea = (String) cbArea.getSelectedItem();
@@ -400,7 +401,8 @@ public class JPanelMedico extends javax.swing.JPanel {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 medicoSeleccionado.setFechaNacimiento(dateFormat.parse(txtFechaNacimiento.getText()));
             } catch (ParseException ex) {
-                Logger.getLogger(JPanelMedico.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "El formato de fecha es incorrecto.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+                return;
             }
             Medico.actualizar(CitaSalud.medicos);
             inicializarTabla();

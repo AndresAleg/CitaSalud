@@ -82,6 +82,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
         btnSalir = new javax.swing.JPanel();
         lblIconSalir = new javax.swing.JLabel();
         lblSalir = new javax.swing.JLabel();
+        btnFarmacia = new javax.swing.JPanel();
+        lblIconFarmacia = new javax.swing.JLabel();
+        lblFarmacia = new javax.swing.JLabel();
         Ventana = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -483,6 +486,41 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnFarmacia.setBackground(new java.awt.Color(32, 34, 75));
+        btnFarmacia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFarmaciaMouseClicked(evt);
+            }
+        });
+
+        lblIconFarmacia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIconFarmacia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/area32.png"))); // NOI18N
+
+        lblFarmacia.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
+        lblFarmacia.setForeground(new java.awt.Color(255, 255, 255));
+        lblFarmacia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFarmacia.setText("FARMACIA");
+
+        javax.swing.GroupLayout btnFarmaciaLayout = new javax.swing.GroupLayout(btnFarmacia);
+        btnFarmacia.setLayout(btnFarmaciaLayout);
+        btnFarmaciaLayout.setHorizontalGroup(
+            btnFarmaciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnFarmaciaLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(lblIconFarmacia, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblFarmacia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        btnFarmaciaLayout.setVerticalGroup(
+            btnFarmaciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnFarmaciaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(btnFarmaciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblIconFarmacia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblFarmacia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
@@ -502,6 +540,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(btnFarmacia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -528,7 +567,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addComponent(btnCamilla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnFarmacia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -580,6 +621,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     private void btnPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPacienteMouseClicked
         // TODO add your handling code here:
+        JPanelPaciente pPaciente = new JPanelPaciente();
+        pPaciente.setSize(1200, 900);
+        pPaciente.setLocation(0, 0);
+        
+        Ventana.removeAll();
+        Ventana.add(pPaciente);
+        Ventana.revalidate();
+        Ventana.repaint();
     }//GEN-LAST:event_btnPacienteMouseClicked
 
     private void btnMedicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMedicoMouseClicked
@@ -652,6 +701,18 @@ public class JFramePrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalidaMouseClicked
 
+    private void btnFarmaciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFarmaciaMouseClicked
+        // TODO add your handling code here:
+         JPanelFarmacia pFarmacia = new JPanelFarmacia();
+         pFarmacia.setSize(1200, 900);
+         pFarmacia.setLocation(0, 0);
+        
+         Ventana.removeAll();
+         Ventana.add(pFarmacia);
+         Ventana.revalidate();
+         Ventana.repaint();
+    }//GEN-LAST:event_btnFarmaciaMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -694,6 +755,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel btnCamilla;
     private javax.swing.JPanel btnCita;
     private javax.swing.JPanel btnConsultorio;
+    private javax.swing.JPanel btnFarmacia;
     private javax.swing.JPanel btnHome;
     private javax.swing.JPanel btnMedicamento;
     private javax.swing.JPanel btnMedico;
@@ -706,12 +768,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblCita;
     private javax.swing.JLabel lblConsultorio;
     private javax.swing.JLabel lblConsultorio3;
+    private javax.swing.JLabel lblFarmacia;
     private javax.swing.JLabel lblHome;
     private javax.swing.JLabel lblIconArea;
     private javax.swing.JLabel lblIconCamilla;
     private javax.swing.JLabel lblIconCita;
     private javax.swing.JLabel lblIconConsultorio;
     private javax.swing.JLabel lblIconConsultorio3;
+    private javax.swing.JLabel lblIconFarmacia;
     private javax.swing.JLabel lblIconHome;
     private javax.swing.JLabel lblIconMedicamento;
     private javax.swing.JLabel lblIconMedico;
