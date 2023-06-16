@@ -14,7 +14,7 @@ El sistema de gestión de citas médicas es una aplicación que permite programa
 - El sistema permite eliminar médicos innecesarios del sistema.
 - El sistema permite registrar nuevos pacientes en el sistema.
 - El sistema permite editar la información de los pacientes existentes en el sistema.
-- En el sistema permite eliminar pacientes innecesarios del sistema.
+- El sistema permite eliminar pacientes innecesarios del sistema.
 
 El sistema está diseñado para ser intuitivo y fácil de usar, brindando una experiencia eficiente para los profesionales de la salud.
 
