@@ -2,7 +2,6 @@ package CitaSalud.pantallas;
 
 import CitaSalud.CitaSalud;
 import CitaSalud.Entidades.Paciente;
-import com.sun.istack.internal.logging.Logger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,8 +40,8 @@ public class JPanelPaciente extends javax.swing.JPanel {
                 paciente.getDni(),
                 paciente.getNombre(),
                 paciente.getApellido(),
-                paciente.getCelular(),
-                edadEnAnios
+                edadEnAnios,
+                paciente.getFechaNacimiento()
             };
             model.addRow(fila);
         }
@@ -84,7 +83,7 @@ public class JPanelPaciente extends javax.swing.JPanel {
         }
         return false;
     }
-    
+     
     private void limpiarControles() {
         txtDni.setText("");
         txtNombres.setText("");
@@ -323,7 +322,8 @@ public class JPanelPaciente extends javax.swing.JPanel {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             nuevoPaciente.setFechaNacimiento(dateFormat.parse(txtFechaNacimiento.getText()));
         } catch (ParseException ex) {
-            java.util.logging.Logger.getLogger(JPanelPaciente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "El formato de fecha es incorrecto.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         
         CitaSalud.pacientes.add(nuevoPaciente);
@@ -351,7 +351,8 @@ public class JPanelPaciente extends javax.swing.JPanel {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 pacienteSeleccionado.setFechaNacimiento(dateFormat.parse(txtFechaNacimiento.getText()));
             } catch (ParseException ex) {
-                java.util.logging.Logger.getLogger(JPanelMedico.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "El formato de fecha es incorrecto.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+                return;
             }
             
             Paciente.actualizar(CitaSalud.pacientes);
