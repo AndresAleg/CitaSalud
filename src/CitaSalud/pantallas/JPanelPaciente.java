@@ -2,7 +2,12 @@ package CitaSalud.pantallas;
 
 import CitaSalud.CitaSalud;
 import CitaSalud.Entidades.Paciente;
+import com.sun.istack.internal.logging.Logger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
@@ -17,6 +22,8 @@ public class JPanelPaciente extends javax.swing.JPanel {
      */
     public JPanelPaciente() {
         initComponents();
+        inicializarTabla();
+        limpiarControles();
     }
     
     private void inicializarTabla() {
@@ -294,7 +301,34 @@ public class JPanelPaciente extends javax.swing.JPanel {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
+       if (verificarControlesVacio()) {
+            JOptionPane.showMessageDialog(this, "Debe completar los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String dni = txtDni.getText();
+        if (existePaciente(dni)) {
+            JOptionPane.showMessageDialog(this, "El DNI del paciente ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
+        Paciente nuevoPaciente = new Paciente();
+        nuevoPaciente.setDni(dni);
+        nuevoPaciente.setNombre(txtNombres.getText());
+        nuevoPaciente.setApellido(txtApellidos.getText());
+        nuevoPaciente.setCelular(txtCelular.getText());
+        
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            nuevoPaciente.setFechaNacimiento(dateFormat.parse(txtFechaNacimiento.getText()));
+        } catch (ParseException ex) {
+            java.util.logging.Logger.getLogger(JPanelPaciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        CitaSalud.pacientes.add(nuevoPaciente);
+        Paciente.actualizar(CitaSalud.pacientes);
+        inicializarTabla();
+        limpiarControles();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
