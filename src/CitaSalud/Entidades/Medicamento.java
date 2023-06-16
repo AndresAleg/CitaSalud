@@ -11,8 +11,9 @@ package CitaSalud.Entidades;
  */
 public class Medicamento {
     
-        private String nombre;
-      private String descripcion;
+    private String nombre;
+    private String descripcion;
+    private int cantidad = 1;
     
 
     public String getNombre() {
@@ -31,5 +32,11 @@ public class Medicamento {
         this.descripcion = descripcion;
     }
 
-  
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
 }

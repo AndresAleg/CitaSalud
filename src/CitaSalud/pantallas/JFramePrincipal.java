@@ -580,6 +580,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     private void btnPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPacienteMouseClicked
         // TODO add your handling code here:
+        JPanelPaciente pPaciente = new JPanelPaciente();
+        pPaciente.setSize(1200, 900);
+        pPaciente.setLocation(0, 0);
+        
+        Ventana.removeAll();
+        Ventana.add(pPaciente);
+        Ventana.revalidate();
+        Ventana.repaint();
     }//GEN-LAST:event_btnPacienteMouseClicked
 
     private void btnMedicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMedicoMouseClicked
