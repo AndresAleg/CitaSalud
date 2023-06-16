@@ -283,6 +283,7 @@ public class JPanelFarmacia extends javax.swing.JPanel {
             }
 
             txtPaciente.setText((String) farmaciaEncontrada.getNombre());
+
         }
     }//GEN-LAST:event_tbFarmaciaMouseClicked
 

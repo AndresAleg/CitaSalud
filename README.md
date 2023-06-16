@@ -12,8 +12,11 @@ El sistema de gestión de citas médicas es una aplicación que permite programa
 - El sistema permite registrar nuevos médicos en el sistema.
 - El sistema permite editar la información de los médicos existentes en el sistema.
 - El sistema permite eliminar médicos innecesarios del sistema.
+- El sistema permite registrar nuevos pacientes en el sistema.
+- El sistema permite editar la información de los pacientes existentes en el sistema.
+- El sistema permite eliminar pacientes innecesarios del sistema.
 
-El sistema está diseñado para ser intuitivo y fácil de usar, brindando una experiencia eficiente tanto para los pacientes como para los profesionales de la salud.
+El sistema está diseñado para ser intuitivo y fácil de usar, brindando una experiencia eficiente para los profesionales de la salud.
 
 ## Características principales
 
@@ -29,6 +32,7 @@ El sistema está diseñado para ser intuitivo y fácil de usar, brindando una ex
 
 - Netbeans 8.2 o superior
 - Java Development Kit (JDK) 8
+- Pantalla con resolución mínima 1440x900
 
 ## Instalación y configuración
 ```
