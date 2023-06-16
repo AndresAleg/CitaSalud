@@ -364,7 +364,26 @@ public class JPanelPaciente extends javax.swing.JPanel {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
+        String dni = txtDni.getText();
         
+        if (existePaciente(dni)) {
+            int opcion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de eliminar el paciente?", "Confirmación", JOptionPane.YES_NO_OPTION);
+            
+            if (opcion == JOptionPane.YES_OPTION) {
+                for (Paciente paciente :CitaSalud.pacientes) {
+                    if (paciente.getDni().equals(dni)) {
+                        CitaSalud.pacientes.remove(paciente);
+                        break;
+                    }
+                }
+                
+                Paciente.actualizar(CitaSalud.pacientes);
+                inicializarTabla();
+                limpiarControles();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró el paciente", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void tbPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPacienteMouseClicked
