@@ -34,35 +34,41 @@
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                      <Component id="lblCodigo" min="-2" pref="115" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                              <Component id="lblCodigo" min="-2" pref="115" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtCodigo" max="32767" attributes="0"/>
+                                  <Component id="cbMedico" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="lblMedico" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="cbPaciente" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblPaciente" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="lblFecha" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="txtFecha" min="-2" pref="166" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="lblArea" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="txtHora" max="32767" attributes="0"/>
+                                  <Component id="lblHora" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="cbArea" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txtCodigo" max="32767" attributes="0"/>
-                          <Component id="cbMedico" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="lblMedico" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="cbPaciente" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblPaciente" min="-2" pref="115" max="-2" attributes="0"/>
-                          <Component id="lblFecha" min="-2" pref="115" max="-2" attributes="0"/>
-                          <Component id="txtFecha" min="-2" pref="166" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblArea" min="-2" pref="115" max="-2" attributes="0"/>
-                          <Component id="txtHora" max="32767" attributes="0"/>
-                          <Component id="lblHora" min="-2" pref="115" max="-2" attributes="0"/>
-                          <Component id="cbArea" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="268" max="-2" attributes="0"/>
+                      <Component id="btnImprimir" min="-2" pref="140" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="btnRegistrar" min="-2" pref="140" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="btnEliminar" min="-2" pref="140" max="-2" attributes="0"/>
@@ -118,6 +124,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnRegistrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnImprimir" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="385" max="-2" attributes="0"/>
@@ -340,5 +347,19 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnImprimir">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Century Gothic" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Imprimir"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImprimirActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
