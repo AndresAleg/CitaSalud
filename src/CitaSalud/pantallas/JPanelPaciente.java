@@ -6,6 +6,7 @@ import com.sun.istack.internal.logging.Logger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -333,7 +334,32 @@ public class JPanelPaciente extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
+        if (verificarControlesVacio()) {
+            JOptionPane.showMessageDialog(this, "Debe completar los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
+        int indiceFilaSeleccionada = tbPaciente.getSelectedRow();
+        
+        if (indiceFilaSeleccionada >= 0) {
+            Paciente pacienteSeleccionado = CitaSalud.pacientes.get(indiceFilaSeleccionada);
+            pacienteSeleccionado.setNombre(txtNombres.getText());
+            pacienteSeleccionado.setApellido(txtApellidos.getText());
+            pacienteSeleccionado.setCelular(txtCelular.getText());
+            
+            try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                pacienteSeleccionado.setFechaNacimiento(dateFormat.parse(txtFechaNacimiento.getText()));
+            } catch (ParseException ex) {
+                java.util.logging.Logger.getLogger(JPanelMedico.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            Paciente.actualizar(CitaSalud.pacientes);
+            inicializarTabla();
+            limpiarControles();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona una fila.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -343,7 +369,31 @@ public class JPanelPaciente extends javax.swing.JPanel {
 
     private void tbPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPacienteMouseClicked
         // TODO add your handling code here:
-
+        int filaSeleccionada = tbPaciente.getSelectedRow();
+        
+        if (filaSeleccionada != -1) {
+            Object valor = tbPaciente.getValueAt(filaSeleccionada, 0);
+            
+            for (Paciente paciente : CitaSalud.pacientes) {
+                if (paciente.getDni().equals(valor)) {
+                    
+                    txtDni.setText(paciente.getDni());
+                    txtNombres.setText(paciente.getNombre());
+                    txtApellidos.setText(paciente.getApellido());
+                    txtCelular.setText(paciente.getCelular());
+                    
+                    String fechaString = paciente.getFechaNacimiento().toString();
+                    SimpleDateFormat formatoEntrada = new SimpleDateFormat("E MMM dd hh:mm:ss z yyyy", Locale.ENGLISH);
+                    try {
+                        Date fechaFormato = formatoEntrada.parse(fechaString);
+                        SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
+                        txtFechaNacimiento.setText(formatoSalida.format(fechaFormato));
+                    } catch (ParseException ex) {
+                        java.util.logging.Logger.getLogger(JPanelMedico.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_tbPacienteMouseClicked
 
 
