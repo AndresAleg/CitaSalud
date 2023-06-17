@@ -604,6 +604,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
         // TODO add your handling code here:
+        JFrameLogin frameLogin = new JFrameLogin();
+        frameLogin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSalirMouseClicked
 
