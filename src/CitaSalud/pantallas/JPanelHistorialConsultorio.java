@@ -3,8 +3,14 @@ package CitaSalud.pantallas;
 import CitaSalud.CitaSalud;
 import CitaSalud.Entidades.Cita;
 import CitaSalud.Entidades.Consultorio;
+import CitaSalud.Entidades.Medicamento;
 import CitaSalud.Entidades.Medico;
 import CitaSalud.Entidades.Paciente;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +25,7 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
     public JPanelHistorialConsultorio() {
         initComponents();
         inicializarTabla();
+        limpiarControles();
     }
 
     private void inicializarTabla() {
@@ -32,6 +39,7 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
             Cita cita = consultorio.getCita();
 
             Object[] fila = {
+                cita.getCodigo(),
                 medico.getNombre() + " " + medico.getApellido(),
                 cita.getFecha(),
                 consultorio.getMotivo(),
@@ -40,6 +48,20 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
 
             model.addRow(fila);
         }
+    }
+    
+    private void limpiarControles() {
+        txaDiagnostico.setText("");
+        txaSintoma.setText("");
+        
+        DefaultTableModel model = (DefaultTableModel) tbMedicamento.getModel();
+        model.setRowCount(0);
+        
+        txtDni.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtCelular.setText("");
+        txtFechaNacimiento.setText("");
     }
 
     /**
@@ -78,6 +100,7 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
 
         setMaximumSize(new java.awt.Dimension(1200, 900));
         setMinimumSize(new java.awt.Dimension(1200, 900));
+        setLayout(null);
 
         Encabezado.setBackground(new java.awt.Color(27, 29, 61));
 
@@ -99,12 +122,21 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        add(Encabezado);
+        Encabezado.setBounds(0, 0, 1200, 99);
+
         txtBuscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        add(txtBuscar);
+        txtBuscar.setBounds(67, 190, 165, 29);
 
         lblDniPaciente.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblDniPaciente.setText("DNI PACIENTE");
+        add(lblDniPaciente);
+        lblDniPaciente.setBounds(31, 150, 123, 32);
 
         lblIconBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/buscar32.png"))); // NOI18N
+        add(lblIconBuscar);
+        lblIconBuscar.setBounds(31, 188, 32, 32);
 
         btnBuscar.setBackground(new java.awt.Color(153, 204, 255));
         btnBuscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -114,13 +146,15 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
                 btnBuscarActionPerformed(evt);
             }
         });
+        add(btnBuscar);
+        btnBuscar.setBounds(259, 189, 120, 31);
 
         tbConsultorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Médico", "Fecha", "Consulta", "Paciente"
+                "Codigo", "Médico", "Fecha", "Consulta", "Paciente"
             }
         ));
         tbConsultorio.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -130,6 +164,9 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbConsultorio);
 
+        add(jScrollPane1);
+        jScrollPane1.setBounds(31, 283, 590, 573);
+
         lblDatosPaciente.setBackground(new java.awt.Color(204, 204, 204));
         lblDatosPaciente.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblDatosPaciente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -137,6 +174,8 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
         lblDatosPaciente.setToolTipText("");
         lblDatosPaciente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblDatosPaciente.setOpaque(true);
+        add(lblDatosPaciente);
+        lblDatosPaciente.setBounds(725, 162, 380, 20);
 
         pDatosPaciente.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
@@ -192,6 +231,9 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        add(pDatosPaciente);
+        pDatosPaciente.setBounds(725, 182, 380, 170);
+
         lblSintoma.setBackground(new java.awt.Color(204, 204, 204));
         lblSintoma.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblSintoma.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -199,11 +241,16 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
         lblSintoma.setToolTipText("");
         lblSintoma.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblSintoma.setOpaque(true);
+        add(lblSintoma);
+        lblSintoma.setBounds(640, 380, 266, 20);
 
         txaSintoma.setColumns(20);
         txaSintoma.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txaSintoma.setRows(5);
         jScrollPane2.setViewportView(txaSintoma);
+
+        add(jScrollPane2);
+        jScrollPane2.setBounds(640, 400, 266, 140);
 
         lblDiagnostico.setBackground(new java.awt.Color(204, 204, 204));
         lblDiagnostico.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -212,11 +259,16 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
         lblDiagnostico.setToolTipText("");
         lblDiagnostico.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblDiagnostico.setOpaque(true);
+        add(lblDiagnostico);
+        lblDiagnostico.setBounds(920, 380, 266, 20);
 
         txaDiagnostico.setColumns(20);
         txaDiagnostico.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txaDiagnostico.setRows(5);
         jScrollPane3.setViewportView(txaDiagnostico);
+
+        add(jScrollPane3);
+        jScrollPane3.setBounds(920, 400, 266, 140);
 
         lblMedicamentos.setBackground(new java.awt.Color(204, 204, 204));
         lblMedicamentos.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -225,6 +277,8 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
         lblMedicamentos.setToolTipText("");
         lblMedicamentos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblMedicamentos.setOpaque(true);
+        add(lblMedicamentos);
+        lblMedicamentos.setBounds(701, 598, 420, 20);
 
         tbMedicamento.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tbMedicamento.setModel(new javax.swing.table.DefaultTableModel(
@@ -245,88 +299,15 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(tbMedicamento);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblIconBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(btnBuscar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDniPaciente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDatosPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pDatosPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(95, 95, 95))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2)
-                            .addComponent(lblSintoma, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3)
-                            .addComponent(lblDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(79, 79, 79))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(lblDniPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnBuscar))
-                            .addComponent(lblIconBuscar))
-                        .addGap(70, 70, 70)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(37, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(lblDatosPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(pDatosPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblSintoma, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblDiagnostico, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(20, 20, 20)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(92, 92, 92))))
-        );
+        add(jScrollPane4);
+        jScrollPane4.setBounds(701, 618, 420, 190);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
 
+        limpiarControles();
+        
         if (txtBuscar.getText().isEmpty()) {
             inicializarTabla();
             return;
@@ -344,6 +325,7 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
                 Cita cita = consultorio.getCita();
 
                 Object[] fila = {
+                    cita.getCodigo(),
                     medico.getNombre() + " " + medico.getApellido(),
                     cita.getFecha(),
                     consultorio.getMotivo(),
@@ -361,8 +343,46 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
         int filaSeleccionada = tbConsultorio.getSelectedRow();
         
         if (filaSeleccionada != -1) {
+            Object valor = tbConsultorio.getValueAt(filaSeleccionada, 0);
+            
+            Consultorio consultorioEncontrado = null;
+            
+            for (Consultorio consultorio : CitaSalud.consultorios) {
+                if (consultorio.getCita().getCodigo().equals(valor)) {
+                    consultorioEncontrado = consultorio;
+                    break;
+                }
+            }
+            
+            Paciente paciente = consultorioEncontrado.getCita().getPaciente();
+            
+            txtDni.setText(paciente.getDni());
+            txtNombre.setText(paciente.getNombre());
+            txtApellido.setText(paciente.getApellido());
+            txtCelular.setText(paciente.getCelular());
+            
+            String fechaString = paciente.getFechaNacimiento().toString();
+            SimpleDateFormat formatoEntrada = new SimpleDateFormat("E MMM dd hh:mm:ss z yyyy", Locale.ENGLISH);
+            try {
+                Date fechaFormato = formatoEntrada.parse(fechaString);
+                SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
+                txtFechaNacimiento.setText(formatoSalida.format(fechaFormato));
+            } catch (ParseException ex) {
+                java.util.logging.Logger.getLogger(JPanelMedico.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             
+            txaDiagnostico.setText(consultorioEncontrado.getDiagnostico());
+            txaSintoma.setText(consultorioEncontrado.getSintoma());
+            
+            
+            DefaultTableModel model = (DefaultTableModel) tbMedicamento.getModel();
+            model.setRowCount(0);
+            
+            for (Medicamento medicamento : consultorioEncontrado.getMedicamentos()) {
+                Object[] fila = {medicamento.getNombre(), medicamento.getCantidad() };
+                model.addRow(fila);
+            }
         } 
     }//GEN-LAST:event_tbConsultorioMouseClicked
 

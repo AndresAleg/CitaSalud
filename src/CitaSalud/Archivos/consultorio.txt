@@ -1,1 +1,2 @@
-C0000002;motivo;sintomas;diagnostico;alprazolam,3;paracetamol,1
+C0000001;primera consulta;los sintomas;el diagnostico;Alprazolam;5,Paracetamol;3,Repriman;4
+C0000002;primera consulta;sintomas;diagnostico;Repriman;4,Panadol;3
