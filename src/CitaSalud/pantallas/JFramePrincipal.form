@@ -407,6 +407,9 @@
               <Color blue="4b" green="22" red="20" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnConsultorioMouseClicked"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">

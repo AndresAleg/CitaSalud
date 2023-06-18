@@ -283,6 +283,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         );
 
         btnConsultorio.setBackground(new java.awt.Color(32, 34, 75));
+        btnConsultorio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnConsultorioMouseClicked(evt);
+            }
+        });
 
         lblIconConsultorio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconConsultorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/consultorio32.png"))); // NOI18N
@@ -712,6 +717,18 @@ public class JFramePrincipal extends javax.swing.JFrame {
          Ventana.revalidate();
          Ventana.repaint();
     }//GEN-LAST:event_btnFarmaciaMouseClicked
+
+    private void btnConsultorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultorioMouseClicked
+        // TODO add your handling code here:
+        JPanelConsultorio pConsultorio = new JPanelConsultorio();
+        pConsultorio.setSize(1200, 900);
+        pConsultorio.setLocation(0, 0);
+        
+        Ventana.removeAll();
+        Ventana.add(pConsultorio);
+        Ventana.revalidate();
+        Ventana.repaint();
+    }//GEN-LAST:event_btnConsultorioMouseClicked
 
     /**
      * @param args the command line arguments

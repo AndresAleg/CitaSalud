@@ -42,13 +42,6 @@ public class JPanelFarmacia extends javax.swing.JPanel {
         for (Farmacia farmacia : CitaSalud.farmacias) {
             
             if (!farmacia.getAtendido()) {
-                Object[] fila = {   
-                    farmacia.getPaciente(), 
-                    farmacia.getConsultorio().getNombre() + " " + farmacia.getConsultorio().getApellido(),
-                   
-                  
-                };
-                model.addRow(fila);
             }
         }
     }
