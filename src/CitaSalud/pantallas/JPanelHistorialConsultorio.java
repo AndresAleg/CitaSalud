@@ -18,6 +18,7 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
      */
     public JPanelHistorialConsultorio() {
         initComponents();
+        inicializarTabla();
     }
 
     private void inicializarTabla() {
@@ -122,6 +123,11 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
                 "Médico", "Fecha", "Consulta", "Paciente"
             }
         ));
+        tbConsultorio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbConsultorioMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbConsultorio);
 
         lblDatosPaciente.setBackground(new java.awt.Color(204, 204, 204));
@@ -348,6 +354,17 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tbConsultorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbConsultorioMouseClicked
+        // TODO add your handling code here:
+        
+        int filaSeleccionada = tbConsultorio.getSelectedRow();
+        
+        if (filaSeleccionada != -1) {
+            
+            
+        } 
+    }//GEN-LAST:event_tbConsultorioMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

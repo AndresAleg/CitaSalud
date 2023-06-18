@@ -1,0 +1,1 @@
+C0000002;motivo;sintomas;diagnostico;alprazolam,3;paracetamol,1

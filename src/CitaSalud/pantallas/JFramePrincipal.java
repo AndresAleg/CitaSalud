@@ -3,6 +3,7 @@ package CitaSalud.pantallas;
 import CitaSalud.CitaSalud;
 import CitaSalud.Entidades.Area;
 import CitaSalud.Entidades.Cita;
+import CitaSalud.Entidades.Consultorio;
 import CitaSalud.Entidades.Medico;
 import CitaSalud.Entidades.Paciente;
 
@@ -24,6 +25,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         CitaSalud.medicos = Medico.cargarArchivoDeTexto();
         CitaSalud.pacientes = Paciente.cargarArchivoDeTexto();
         CitaSalud.citas = Cita.cargarArchivoDeTexto();
+        CitaSalud.consultorios = Consultorio.cargarArchivoDeTexto();
         
  
         JPanelHome pHome = new JPanelHome();

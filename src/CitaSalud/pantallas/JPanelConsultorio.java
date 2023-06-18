@@ -427,6 +427,7 @@ public class JPanelConsultorio extends javax.swing.JPanel {
         CitaSalud.consultorios.add(nuevoConsultorio);
         citaSeleccionado.setAtendido(true);
         Cita.actualizar(CitaSalud.citas);
+        Consultorio.actualizar(CitaSalud.consultorios);
         
         JOptionPane.showMessageDialog(this, "Se ha registrado correctamente la consulta.", "Información", JOptionPane.INFORMATION_MESSAGE);
         limpiarFormulario();

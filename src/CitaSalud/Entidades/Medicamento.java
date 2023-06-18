@@ -15,6 +15,11 @@ public class Medicamento {
     private String descripcion;
     private int cantidad = 1;
     
+    
+    @Override
+    public String toString() {
+        return nombre + ";" + cantidad;
+    }
 
     public String getNombre() {
         return nombre;
