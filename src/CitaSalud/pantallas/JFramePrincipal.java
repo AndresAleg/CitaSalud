@@ -31,11 +31,54 @@ public class JFramePrincipal extends javax.swing.JFrame {
         JPanelHome pHome = new JPanelHome();
         pHome.setSize(1200, 900);
         pHome.setLocation(0, 0);
-        
+        visualizarBotones();
         Ventana.removeAll();
         Ventana.add(pHome);
         Ventana.revalidate();
         Ventana.repaint();
+    }
+    
+    private void visualizarBotones() {
+        
+        switch (CitaSalud.usuario.getRole()) {
+            case "medico":
+                btnMedico.setVisible(false);
+                btnArea.setVisible(false);
+                btnPaciente.setVisible(false);
+                btnCita.setVisible(false);
+                btnConsultorio.setVisible(true);
+                btnVisualizar.setVisible(true);
+                btnMedicamento.setVisible(false);
+                btnCamilla.setVisible(true);
+                btnSalida.setVisible(true);
+                btnFarmacia.setVisible(false);
+                break;
+            case "asistente":
+                btnMedico.setVisible(false);
+                btnArea.setVisible(false);
+                btnPaciente.setVisible(false);
+                btnCita.setVisible(true);
+                btnConsultorio.setVisible(false);
+                btnVisualizar.setVisible(true);
+                btnMedicamento.setVisible(false);
+                btnCamilla.setVisible(false);
+                btnSalida.setVisible(false);
+                btnFarmacia.setVisible(true);
+                break;
+            case "administrador":
+                btnMedico.setVisible(true);
+                btnArea.setVisible(true);
+                btnPaciente.setVisible(true);
+                btnCita.setVisible(true);
+                btnConsultorio.setVisible(true);
+                btnVisualizar.setVisible(true);
+                btnMedicamento.setVisible(true);
+                btnCamilla.setVisible(true);
+                btnSalida.setVisible(true);
+                btnFarmacia.setVisible(true);
+                break;
+        }
+
     }
 
     /**
@@ -59,8 +102,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         lblIconArea = new javax.swing.JLabel();
         lblArea = new javax.swing.JLabel();
         btnPaciente = new javax.swing.JPanel();
-        lblIconPaciente = new javax.swing.JLabel();
         lblPaciente = new javax.swing.JLabel();
+        lblIconPaciente = new javax.swing.JLabel();
         btnCita = new javax.swing.JPanel();
         lblIconCita = new javax.swing.JLabel();
         lblCita = new javax.swing.JLabel();
@@ -79,20 +122,21 @@ public class JFramePrincipal extends javax.swing.JFrame {
         btnSalida = new javax.swing.JPanel();
         lblIconSalida = new javax.swing.JLabel();
         lblSalida = new javax.swing.JLabel();
-        btnSalir = new javax.swing.JPanel();
-        lblIconSalir = new javax.swing.JLabel();
-        lblSalir = new javax.swing.JLabel();
         btnFarmacia = new javax.swing.JPanel();
         lblIconFarmacia = new javax.swing.JLabel();
         lblFarmacia = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JPanel();
+        lblIconSalir = new javax.swing.JLabel();
+        lblSalir = new javax.swing.JLabel();
         Ventana = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1440, 900));
         setMinimumSize(new java.awt.Dimension(1440, 900));
         setUndecorated(true);
         setOpacity(0.98F);
         setSize(new java.awt.Dimension(1400, 900));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         Menu.setBackground(new java.awt.Color(27, 29, 61));
         Menu.setAlignmentX(0.0F);
@@ -111,8 +155,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/logo.png"))); // NOI18N
+        lblLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblLogo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         btnHome.setBackground(new java.awt.Color(32, 34, 75));
+        btnHome.setMaximumSize(new java.awt.Dimension(240, 40));
+        btnHome.setMinimumSize(new java.awt.Dimension(240, 40));
+        btnHome.setPreferredSize(new java.awt.Dimension(240, 40));
         btnHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnHomeMouseClicked(evt);
@@ -121,32 +170,38 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         lblIconHome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/home32.png"))); // NOI18N
+        lblIconHome.setMaximumSize(new java.awt.Dimension(40, 34));
+        lblIconHome.setMinimumSize(new java.awt.Dimension(40, 34));
+        lblIconHome.setPreferredSize(new java.awt.Dimension(40, 34));
 
         lblHome.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         lblHome.setForeground(new java.awt.Color(255, 255, 255));
         lblHome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHome.setText("HOME");
+        lblHome.setMaximumSize(new java.awt.Dimension(190, 40));
+        lblHome.setMinimumSize(new java.awt.Dimension(190, 40));
+        lblHome.setPreferredSize(new java.awt.Dimension(190, 40));
 
         javax.swing.GroupLayout btnHomeLayout = new javax.swing.GroupLayout(btnHome);
         btnHome.setLayout(btnHomeLayout);
         btnHomeLayout.setHorizontalGroup(
             btnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnHomeLayout.createSequentialGroup()
-                .addComponent(lblIconHome, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lblIconHome, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnHomeLayout.setVerticalGroup(
             btnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnHomeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(btnHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIconHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(lblHome, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(lblIconHome, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         btnMedico.setBackground(new java.awt.Color(32, 34, 75));
+        btnMedico.setMaximumSize(new java.awt.Dimension(240, 40));
+        btnMedico.setMinimumSize(new java.awt.Dimension(240, 40));
+        btnMedico.setPreferredSize(new java.awt.Dimension(240, 40));
         btnMedico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMedicoMouseClicked(evt);
@@ -155,32 +210,42 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         lblIconMedico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/medico32.png"))); // NOI18N
+        lblIconMedico.setMaximumSize(new java.awt.Dimension(40, 34));
+        lblIconMedico.setMinimumSize(new java.awt.Dimension(40, 34));
+        lblIconMedico.setPreferredSize(new java.awt.Dimension(40, 34));
 
         lblMedico.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         lblMedico.setForeground(new java.awt.Color(255, 255, 255));
         lblMedico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMedico.setText("MÉDICO");
+        lblMedico.setMaximumSize(new java.awt.Dimension(190, 40));
+        lblMedico.setMinimumSize(new java.awt.Dimension(190, 40));
+        lblMedico.setPreferredSize(new java.awt.Dimension(190, 40));
 
         javax.swing.GroupLayout btnMedicoLayout = new javax.swing.GroupLayout(btnMedico);
         btnMedico.setLayout(btnMedicoLayout);
         btnMedicoLayout.setHorizontalGroup(
             btnMedicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnMedicoLayout.createSequentialGroup()
-                .addComponent(lblIconMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lblIconMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMedico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnMedicoLayout.setVerticalGroup(
             btnMedicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnMedicoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(btnMedicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIconMedico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblMedico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(btnMedicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIconMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         btnArea.setBackground(new java.awt.Color(32, 34, 75));
+        btnArea.setMaximumSize(new java.awt.Dimension(240, 40));
+        btnArea.setMinimumSize(new java.awt.Dimension(240, 40));
+        btnArea.setPreferredSize(new java.awt.Dimension(240, 40));
         btnArea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAreaMouseClicked(evt);
@@ -189,66 +254,85 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         lblIconArea.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconArea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/area32.png"))); // NOI18N
+        lblIconArea.setMaximumSize(new java.awt.Dimension(40, 34));
+        lblIconArea.setMinimumSize(new java.awt.Dimension(40, 34));
+        lblIconArea.setPreferredSize(new java.awt.Dimension(40, 34));
 
         lblArea.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         lblArea.setForeground(new java.awt.Color(255, 255, 255));
         lblArea.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblArea.setText("ÁREA");
+        lblArea.setMaximumSize(new java.awt.Dimension(190, 40));
+        lblArea.setMinimumSize(new java.awt.Dimension(190, 40));
+        lblArea.setPreferredSize(new java.awt.Dimension(190, 40));
 
         javax.swing.GroupLayout btnAreaLayout = new javax.swing.GroupLayout(btnArea);
         btnArea.setLayout(btnAreaLayout);
         btnAreaLayout.setHorizontalGroup(
             btnAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnAreaLayout.createSequentialGroup()
-                .addComponent(lblIconArea, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lblIconArea, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         btnAreaLayout.setVerticalGroup(
             btnAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnAreaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(btnAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIconArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(btnAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIconArea, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         btnPaciente.setBackground(new java.awt.Color(32, 34, 75));
+        btnPaciente.setMaximumSize(new java.awt.Dimension(240, 40));
+        btnPaciente.setMinimumSize(new java.awt.Dimension(240, 40));
+        btnPaciente.setPreferredSize(new java.awt.Dimension(240, 40));
         btnPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPacienteMouseClicked(evt);
             }
         });
 
-        lblIconPaciente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIconPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/paciente32.png"))); // NOI18N
-
         lblPaciente.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         lblPaciente.setForeground(new java.awt.Color(255, 255, 255));
         lblPaciente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPaciente.setText("PACIENTE");
+        lblPaciente.setMaximumSize(new java.awt.Dimension(190, 40));
+        lblPaciente.setMinimumSize(new java.awt.Dimension(190, 40));
+        lblPaciente.setPreferredSize(new java.awt.Dimension(190, 40));
+
+        lblIconPaciente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIconPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/paciente32.png"))); // NOI18N
+        lblIconPaciente.setMaximumSize(new java.awt.Dimension(40, 34));
+        lblIconPaciente.setMinimumSize(new java.awt.Dimension(40, 34));
+        lblIconPaciente.setPreferredSize(new java.awt.Dimension(40, 34));
 
         javax.swing.GroupLayout btnPacienteLayout = new javax.swing.GroupLayout(btnPaciente);
         btnPaciente.setLayout(btnPacienteLayout);
         btnPacienteLayout.setHorizontalGroup(
             btnPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnPacienteLayout.createSequentialGroup()
-                .addComponent(lblIconPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lblIconPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnPacienteLayout.setVerticalGroup(
             btnPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnPacienteLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(btnPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIconPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(btnPacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIconPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         btnCita.setBackground(new java.awt.Color(32, 34, 75));
+        btnCita.setMaximumSize(new java.awt.Dimension(240, 40));
+        btnCita.setMinimumSize(new java.awt.Dimension(240, 40));
+        btnCita.setPreferredSize(new java.awt.Dimension(240, 40));
         btnCita.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCitaMouseClicked(evt);
@@ -257,61 +341,80 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         lblIconCita.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/cita32.png"))); // NOI18N
+        lblIconCita.setMaximumSize(new java.awt.Dimension(40, 34));
+        lblIconCita.setMinimumSize(new java.awt.Dimension(40, 34));
+        lblIconCita.setPreferredSize(new java.awt.Dimension(40, 34));
 
         lblCita.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         lblCita.setForeground(new java.awt.Color(255, 255, 255));
         lblCita.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCita.setText("CITA");
+        lblCita.setMaximumSize(new java.awt.Dimension(190, 40));
+        lblCita.setMinimumSize(new java.awt.Dimension(190, 40));
+        lblCita.setPreferredSize(new java.awt.Dimension(190, 40));
 
         javax.swing.GroupLayout btnCitaLayout = new javax.swing.GroupLayout(btnCita);
         btnCita.setLayout(btnCitaLayout);
         btnCitaLayout.setHorizontalGroup(
             btnCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnCitaLayout.createSequentialGroup()
-                .addComponent(lblIconCita, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblIconCita, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblCita, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         btnCitaLayout.setVerticalGroup(
             btnCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnCitaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(btnCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIconCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(btnCitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblIconCita, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCita, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnConsultorio.setBackground(new java.awt.Color(32, 34, 75));
+        btnConsultorio.setMaximumSize(new java.awt.Dimension(240, 40));
+        btnConsultorio.setMinimumSize(new java.awt.Dimension(240, 40));
+        btnConsultorio.setPreferredSize(new java.awt.Dimension(240, 40));
 
         lblIconConsultorio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconConsultorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/consultorio32.png"))); // NOI18N
+        lblIconConsultorio.setMaximumSize(new java.awt.Dimension(40, 34));
+        lblIconConsultorio.setMinimumSize(new java.awt.Dimension(40, 34));
+        lblIconConsultorio.setPreferredSize(new java.awt.Dimension(40, 34));
 
         lblConsultorio.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         lblConsultorio.setForeground(new java.awt.Color(255, 255, 255));
         lblConsultorio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblConsultorio.setText("CONSULTORIO");
+        lblConsultorio.setMaximumSize(new java.awt.Dimension(190, 40));
+        lblConsultorio.setMinimumSize(new java.awt.Dimension(190, 40));
+        lblConsultorio.setPreferredSize(new java.awt.Dimension(190, 40));
 
         javax.swing.GroupLayout btnConsultorioLayout = new javax.swing.GroupLayout(btnConsultorio);
         btnConsultorio.setLayout(btnConsultorioLayout);
         btnConsultorioLayout.setHorizontalGroup(
             btnConsultorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnConsultorioLayout.createSequentialGroup()
-                .addComponent(lblIconConsultorio, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lblIconConsultorio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblConsultorio, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                .addComponent(lblConsultorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnConsultorioLayout.setVerticalGroup(
             btnConsultorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnConsultorioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(btnConsultorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIconConsultorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblConsultorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(btnConsultorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblConsultorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIconConsultorio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnVisualizar.setBackground(new java.awt.Color(32, 34, 75));
+        btnVisualizar.setMaximumSize(new java.awt.Dimension(240, 40));
+        btnVisualizar.setMinimumSize(new java.awt.Dimension(240, 40));
+        btnVisualizar.setPreferredSize(new java.awt.Dimension(240, 40));
         btnVisualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnVisualizarMouseClicked(evt);
@@ -322,9 +425,15 @@ public class JFramePrincipal extends javax.swing.JFrame {
         lblConsultorio3.setForeground(new java.awt.Color(255, 255, 255));
         lblConsultorio3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblConsultorio3.setText("VISUALIZACION");
+        lblConsultorio3.setMaximumSize(new java.awt.Dimension(190, 40));
+        lblConsultorio3.setMinimumSize(new java.awt.Dimension(190, 40));
+        lblConsultorio3.setPreferredSize(new java.awt.Dimension(190, 40));
 
         lblIconConsultorio3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconConsultorio3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/visualizacion32.png"))); // NOI18N
+        lblIconConsultorio3.setMaximumSize(new java.awt.Dimension(40, 34));
+        lblIconConsultorio3.setMinimumSize(new java.awt.Dimension(40, 34));
+        lblIconConsultorio3.setPreferredSize(new java.awt.Dimension(40, 34));
 
         javax.swing.GroupLayout btnVisualizarLayout = new javax.swing.GroupLayout(btnVisualizar);
         btnVisualizar.setLayout(btnVisualizarLayout);
@@ -332,22 +441,24 @@ public class JFramePrincipal extends javax.swing.JFrame {
             btnVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnVisualizarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblIconConsultorio3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblConsultorio3)
-                .addContainerGap())
+                .addComponent(lblIconConsultorio3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblConsultorio3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnVisualizarLayout.setVerticalGroup(
             btnVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnVisualizarLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(btnVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblIconConsultorio3)
-                    .addComponent(lblConsultorio3))
+                    .addComponent(lblIconConsultorio3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblConsultorio3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnMedicamento.setBackground(new java.awt.Color(32, 34, 75));
+        btnMedicamento.setMaximumSize(new java.awt.Dimension(240, 40));
+        btnMedicamento.setMinimumSize(new java.awt.Dimension(240, 40));
+        btnMedicamento.setPreferredSize(new java.awt.Dimension(240, 40));
         btnMedicamento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMedicamentoMouseClicked(evt);
@@ -356,33 +467,41 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         lblIconMedicamento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconMedicamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/medicamento32.png"))); // NOI18N
+        lblIconMedicamento.setMaximumSize(new java.awt.Dimension(40, 34));
+        lblIconMedicamento.setMinimumSize(new java.awt.Dimension(40, 34));
+        lblIconMedicamento.setPreferredSize(new java.awt.Dimension(40, 34));
 
         lblMedicamento.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         lblMedicamento.setForeground(new java.awt.Color(255, 255, 255));
         lblMedicamento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMedicamento.setText("MEDICAMENTO");
+        lblMedicamento.setMaximumSize(new java.awt.Dimension(190, 40));
+        lblMedicamento.setMinimumSize(new java.awt.Dimension(190, 40));
+        lblMedicamento.setPreferredSize(new java.awt.Dimension(190, 40));
 
         javax.swing.GroupLayout btnMedicamentoLayout = new javax.swing.GroupLayout(btnMedicamento);
         btnMedicamento.setLayout(btnMedicamentoLayout);
         btnMedicamentoLayout.setHorizontalGroup(
             btnMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnMedicamentoLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(lblIconMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lblIconMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnMedicamentoLayout.setVerticalGroup(
             btnMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnMedicamentoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(btnMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIconMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(btnMedicamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIconMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnCamilla.setBackground(new java.awt.Color(32, 34, 75));
+        btnCamilla.setMaximumSize(new java.awt.Dimension(240, 40));
+        btnCamilla.setMinimumSize(new java.awt.Dimension(240, 40));
+        btnCamilla.setPreferredSize(new java.awt.Dimension(240, 40));
         btnCamilla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCamillaMouseClicked(evt);
@@ -391,33 +510,41 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         lblIconCamilla.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconCamilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/camilla.png"))); // NOI18N
+        lblIconCamilla.setMaximumSize(new java.awt.Dimension(40, 34));
+        lblIconCamilla.setMinimumSize(new java.awt.Dimension(40, 34));
 
         lblCamilla.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         lblCamilla.setForeground(new java.awt.Color(255, 255, 255));
         lblCamilla.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCamilla.setText("CAMILLA");
+        lblCamilla.setMaximumSize(new java.awt.Dimension(190, 40));
+        lblCamilla.setMinimumSize(new java.awt.Dimension(190, 40));
+        lblCamilla.setPreferredSize(new java.awt.Dimension(190, 40));
 
         javax.swing.GroupLayout btnCamillaLayout = new javax.swing.GroupLayout(btnCamilla);
         btnCamilla.setLayout(btnCamillaLayout);
         btnCamillaLayout.setHorizontalGroup(
             btnCamillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnCamillaLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(lblIconCamilla, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblCamilla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lblIconCamilla, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCamilla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnCamillaLayout.setVerticalGroup(
             btnCamillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnCamillaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(btnCamillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIconCamilla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblCamilla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(btnCamillaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCamilla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIconCamilla, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnSalida.setBackground(new java.awt.Color(32, 34, 75));
+        btnSalida.setMaximumSize(new java.awt.Dimension(240, 40));
+        btnSalida.setMinimumSize(new java.awt.Dimension(240, 40));
+        btnSalida.setPreferredSize(new java.awt.Dimension(240, 40));
         btnSalida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSalidaMouseClicked(evt);
@@ -426,67 +553,42 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         lblIconSalida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/salida.png"))); // NOI18N
+        lblIconSalida.setMaximumSize(new java.awt.Dimension(40, 34));
+        lblIconSalida.setMinimumSize(new java.awt.Dimension(40, 34));
+        lblIconSalida.setPreferredSize(new java.awt.Dimension(40, 34));
 
         lblSalida.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         lblSalida.setForeground(new java.awt.Color(255, 255, 255));
         lblSalida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSalida.setText("SALIDA");
+        lblSalida.setMaximumSize(new java.awt.Dimension(190, 40));
+        lblSalida.setMinimumSize(new java.awt.Dimension(190, 40));
+        lblSalida.setPreferredSize(new java.awt.Dimension(190, 40));
 
         javax.swing.GroupLayout btnSalidaLayout = new javax.swing.GroupLayout(btnSalida);
         btnSalida.setLayout(btnSalidaLayout);
         btnSalidaLayout.setHorizontalGroup(
             btnSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnSalidaLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(lblIconSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lblIconSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnSalidaLayout.setVerticalGroup(
             btnSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnSalidaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(btnSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIconSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        btnSalir.setBackground(new java.awt.Color(32, 34, 75));
-        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSalirMouseClicked(evt);
-            }
-        });
-
-        lblIconSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblIconSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/logout32.png"))); // NOI18N
-
-        lblSalir.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
-        lblSalir.setForeground(new java.awt.Color(255, 255, 255));
-        lblSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSalir.setText("SALIR");
-
-        javax.swing.GroupLayout btnSalirLayout = new javax.swing.GroupLayout(btnSalir);
-        btnSalir.setLayout(btnSalirLayout);
-        btnSalirLayout.setHorizontalGroup(
-            btnSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnSalirLayout.createSequentialGroup()
-                .addComponent(lblIconSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        btnSalirLayout.setVerticalGroup(
-            btnSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnSalirLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(btnSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIconSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(btnSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblIconSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnFarmacia.setBackground(new java.awt.Color(32, 34, 75));
+        btnFarmacia.setMaximumSize(new java.awt.Dimension(240, 40));
+        btnFarmacia.setMinimumSize(new java.awt.Dimension(240, 40));
+        btnFarmacia.setPreferredSize(new java.awt.Dimension(240, 40));
         btnFarmacia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnFarmaciaMouseClicked(evt);
@@ -495,29 +597,76 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         lblIconFarmacia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconFarmacia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/area32.png"))); // NOI18N
+        lblIconFarmacia.setMaximumSize(new java.awt.Dimension(40, 34));
+        lblIconFarmacia.setMinimumSize(new java.awt.Dimension(40, 34));
+        lblIconFarmacia.setPreferredSize(new java.awt.Dimension(40, 34));
 
         lblFarmacia.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         lblFarmacia.setForeground(new java.awt.Color(255, 255, 255));
         lblFarmacia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblFarmacia.setText("FARMACIA");
+        lblFarmacia.setMaximumSize(new java.awt.Dimension(190, 40));
+        lblFarmacia.setMinimumSize(new java.awt.Dimension(190, 40));
+        lblFarmacia.setPreferredSize(new java.awt.Dimension(190, 40));
 
         javax.swing.GroupLayout btnFarmaciaLayout = new javax.swing.GroupLayout(btnFarmacia);
         btnFarmacia.setLayout(btnFarmaciaLayout);
         btnFarmaciaLayout.setHorizontalGroup(
             btnFarmaciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnFarmaciaLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(lblIconFarmacia, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
+                .addComponent(lblIconFarmacia, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFarmacia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnFarmaciaLayout.setVerticalGroup(
             btnFarmaciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnFarmaciaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(btnFarmaciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIconFarmacia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblFarmacia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(btnFarmaciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFarmacia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIconFarmacia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btnSalir.setBackground(new java.awt.Color(32, 34, 75));
+        btnSalir.setMaximumSize(new java.awt.Dimension(240, 40));
+        btnSalir.setMinimumSize(new java.awt.Dimension(240, 40));
+        btnSalir.setPreferredSize(new java.awt.Dimension(240, 40));
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalirMouseClicked(evt);
+            }
+        });
+
+        lblIconSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIconSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/logout32.png"))); // NOI18N
+        lblIconSalir.setMaximumSize(new java.awt.Dimension(40, 34));
+        lblIconSalir.setMinimumSize(new java.awt.Dimension(40, 34));
+        lblIconSalir.setPreferredSize(new java.awt.Dimension(40, 34));
+
+        lblSalir.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
+        lblSalir.setForeground(new java.awt.Color(255, 255, 255));
+        lblSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSalir.setText("SALIR");
+        lblSalir.setMaximumSize(new java.awt.Dimension(190, 40));
+        lblSalir.setMinimumSize(new java.awt.Dimension(190, 40));
+        lblSalir.setPreferredSize(new java.awt.Dimension(190, 40));
+
+        javax.swing.GroupLayout btnSalirLayout = new javax.swing.GroupLayout(btnSalir);
+        btnSalir.setLayout(btnSalirLayout);
+        btnSalirLayout.setHorizontalGroup(
+            btnSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnSalirLayout.createSequentialGroup()
+                .addComponent(lblIconSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        btnSalirLayout.setVerticalGroup(
+            btnSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnSalirLayout.createSequentialGroup()
+                .addGroup(btnSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblIconSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -525,37 +674,43 @@ public class JFramePrincipal extends javax.swing.JFrame {
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnMedico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnPaciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnCita, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnConsultorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnVisualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnMedicamento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnSalida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnCamilla, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnConsultorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+            .addComponent(btnSalida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+            .addComponent(btnCamilla, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
             .addGroup(MenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(btnFarmacia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(MenuLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(MenuLayout.createSequentialGroup()
+                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnMedicamento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCita, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVisualizar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnFarmacia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblLogo)
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(btnConsultorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -569,12 +724,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addComponent(btnSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnFarmacia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 200, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        getContentPane().add(Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 900));
+        getContentPane().add(Menu);
+        Menu.setBounds(0, 0, 240, 900);
 
         Ventana.setAlignmentX(0.0F);
         Ventana.setAlignmentY(0.0F);
@@ -583,7 +739,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         Ventana.setPreferredSize(new java.awt.Dimension(1200, 900));
         Ventana.setRequestFocusEnabled(false);
         Ventana.setLayout(new java.awt.BorderLayout());
-        getContentPane().add(Ventana, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 1200, 900));
+        getContentPane().add(Ventana);
+        Ventana.setBounds(240, 0, 1200, 900);
 
         pack();
         setLocationRelativeTo(null);

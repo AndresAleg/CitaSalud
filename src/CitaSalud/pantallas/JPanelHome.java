@@ -22,6 +22,7 @@ public class JPanelHome extends javax.swing.JPanel {
         initComponents();
         lblRolValor.setText(CitaSalud.usuario.getRole());
         lblUsernameValor.setText(CitaSalud.usuario.getUsername());
+        lblIconLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/" + CitaSalud.usuario.getRole() + "logo96.png")));
                 
         Date fechaActual = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("EEEE, d 'de' MMMM 'de' yyyy");
@@ -63,6 +64,7 @@ public class JPanelHome extends javax.swing.JPanel {
         lblUsernameValor = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
+        lblIconLogo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1200, 900));
         setMinimumSize(new java.awt.Dimension(1200, 900));
@@ -72,43 +74,49 @@ public class JPanelHome extends javax.swing.JPanel {
         lblTitulo.setFont(new java.awt.Font("Century Gothic", 0, 70)); // NOI18N
         lblTitulo.setText("Bienvenido a CitaSalud");
         add(lblTitulo);
-        lblTitulo.setBounds(190, 90, 910, 87);
+        lblTitulo.setBounds(160, 70, 910, 87);
 
         lblRol.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
         lblRol.setText("rol:");
         add(lblRol);
-        lblRol.setBounds(510, 310, 52, 45);
+        lblRol.setBounds(590, 430, 52, 45);
 
         lblRolValor.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
         lblRolValor.setText("{rol}");
         add(lblRolValor);
-        lblRolValor.setBounds(600, 310, 390, 45);
+        lblRolValor.setBounds(680, 430, 300, 45);
 
         lblUsername.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
-        lblUsername.setText("username:");
+        lblUsername.setText("usuario:");
         add(lblUsername);
-        lblUsername.setBounds(380, 390, 190, 45);
+        lblUsername.setBounds(510, 480, 140, 45);
 
         lblUsernameValor.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
         lblUsernameValor.setText("{username}");
         add(lblUsernameValor);
-        lblUsernameValor.setBounds(600, 390, 480, 45);
+        lblUsernameValor.setBounds(680, 480, 300, 45);
 
         lblFecha.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
         lblFecha.setText("[EEEE, d 'de' MMMM 'de' yyyy]");
         add(lblFecha);
-        lblFecha.setBounds(370, 640, 520, 45);
+        lblFecha.setBounds(380, 710, 520, 45);
 
         lblHora.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
         lblHora.setText("[hh:mm:ss tt]");
         add(lblHora);
-        lblHora.setBounds(520, 700, 220, 45);
+        lblHora.setBounds(530, 770, 220, 45);
+
+        lblIconLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIconLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/asistentelogo96.png"))); // NOI18N
+        add(lblIconLogo);
+        lblIconLogo.setBounds(340, 400, 150, 170);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblHora;
+    private javax.swing.JLabel lblIconLogo;
     private javax.swing.JLabel lblRol;
     private javax.swing.JLabel lblRolValor;
     private javax.swing.JLabel lblTitulo;
