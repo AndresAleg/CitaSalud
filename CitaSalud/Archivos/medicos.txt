@@ -1,0 +1,7 @@
+12345678;Juan;Pérez;10/05/1980;juanperez@example.com;Pediatría
+23456789;María;Rodríguez;15/07/1992;mrodriguez@example.com;Dermatología
+34567890;Carlos;López;20/02/1985;clopez@example.com;Cardiología
+56789012;Javier;Torres;12/09/1988;jtorres@example.com;Medicina interna
+67890123;Laura;Martínez;25/03/1995;lmartinez@example.com;Cirugía
+78901234;Sergio;Ramírez;18/06/1983;sramirez@example.com;Oftalmología
+90123456;Pablo;Morales;07/04/1987;pmorales@example.com;Radiología

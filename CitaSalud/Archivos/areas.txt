@@ -1,0 +1,7 @@
+Pediatría;Atención médica de bebés, niños y adolescentes.
+Medicina interna;Diagnóstico y tratamiento de enfermedades en adultos.
+Cirugía;Realización de procedimientos quirúrgicos.
+Dermatología;Diagnóstico y tratamiento de enfermedades de la piel.
+Oftalmología;Salud ocular, diagnóstico y cirugías oculares.
+Cardiología;Diagnóstico y tratamiento de enfermedades cardíacas y vasculares.
+Radiología;Uso de imágenes médicas para diagnóstico y tratamiento.
