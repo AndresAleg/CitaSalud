@@ -41,7 +41,7 @@ public class JPanelPaciente extends javax.swing.JPanel {
                 paciente.getNombre(),
                 paciente.getApellido(),
                 edadEnAnios,
-                paciente.getFechaNacimiento()
+                paciente.getCelular()
             };
             model.addRow(fila);
         }
@@ -49,10 +49,10 @@ public class JPanelPaciente extends javax.swing.JPanel {
         TableColumnModel columnModel = tbPaciente.getColumnModel();
         
         columnModel.getColumn(0).setPreferredWidth(70);
-        columnModel.getColumn(1).setPreferredWidth(150);
-        columnModel.getColumn(2).setPreferredWidth(150);
-        columnModel.getColumn(3).setPreferredWidth(250);
-        columnModel.getColumn(4).setPreferredWidth(70);
+        columnModel.getColumn(1).setPreferredWidth(200);
+        columnModel.getColumn(2).setPreferredWidth(200);
+        columnModel.getColumn(3).setPreferredWidth(70);
+        columnModel.getColumn(4).setPreferredWidth(150);
         
         tbPaciente.updateUI();
     }
@@ -113,6 +113,8 @@ public class JPanelPaciente extends javax.swing.JPanel {
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPaciente = new javax.swing.JTable();
+        lblIconBuscar = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
 
         setDoubleBuffered(false);
         setMaximumSize(new java.awt.Dimension(1200, 900));
@@ -228,6 +230,15 @@ public class JPanelPaciente extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbPaciente);
 
+        lblIconBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/buscar32.png"))); // NOI18N
+
+        txtBuscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -258,7 +269,12 @@ public class JPanelPaciente extends javax.swing.JPanel {
                                     .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(lblCelular)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblIconBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(41, 41, 41))))
         );
         layout.setVerticalGroup(
@@ -266,10 +282,10 @@ public class JPanelPaciente extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-                .addComponent(lblDni)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDni)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblNombres)
@@ -288,7 +304,12 @@ public class JPanelPaciente extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblIconBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(41, 41, 41)
                 .addComponent(btnRegistrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -416,6 +437,35 @@ public class JPanelPaciente extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tbPacienteMouseClicked
 
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        // TODO add your handling code here:
+        if (txtBuscar.getText().isEmpty()) {
+            inicializarTabla();
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tbPaciente.getModel();
+        model.setRowCount(0);
+
+        for (Paciente paciente : CitaSalud.pacientes) {
+            if (paciente.getDni().contains(txtBuscar.getText())) {
+                Date fechaActual = new Date();
+                long diferenciaMilisegundos = fechaActual.getTime() - paciente.getFechaNacimiento().getTime();
+                long milisegundosPorAnio = 1000L * 60 * 60 * 24 * 365;
+                long edadEnAnios = diferenciaMilisegundos / milisegundosPorAnio;
+
+                Object[] fila = {
+                    paciente.getDni(),
+                    paciente.getNombre(),
+                    paciente.getApellido(),
+                    edadEnAnios,
+                    paciente.getCelular()
+                };
+                model.addRow(fila);
+            }
+        }
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Encabezado;
@@ -427,10 +477,12 @@ public class JPanelPaciente extends javax.swing.JPanel {
     private javax.swing.JLabel lblCelular;
     private javax.swing.JLabel lblDni;
     private javax.swing.JLabel lblFechaNacimiento;
+    private javax.swing.JLabel lblIconBuscar;
     private javax.swing.JLabel lblNombres;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTable tbPaciente;
     private javax.swing.JTextField txtApellidos;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtFechaNacimiento;

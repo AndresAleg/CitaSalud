@@ -134,6 +134,8 @@ public class JPanelMedico extends javax.swing.JPanel {
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbMedico = new javax.swing.JTable();
+        lblIconBuscar = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
 
         setMaximumSize(new java.awt.Dimension(1200, 900));
         setMinimumSize(new java.awt.Dimension(1200, 900));
@@ -260,6 +262,15 @@ public class JPanelMedico extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbMedico);
 
+        lblIconBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/buscar32.png"))); // NOI18N
+
+        txtBuscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -289,7 +300,12 @@ public class JPanelMedico extends javax.swing.JPanel {
                             .addComponent(lblFechaNacimiento)
                             .addComponent(lblEmail))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblIconBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40))
             .addGroup(layout.createSequentialGroup()
                 .addGap(133, 133, 133)
@@ -303,8 +319,12 @@ public class JPanelMedico extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(133, 133, 133)
-                .addComponent(lblDni)
+                .addGap(124, 124, 124)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblDni)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblIconBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -469,6 +489,36 @@ public class JPanelMedico extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbAreaActionPerformed
 
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        // TODO add your handling code here:
+        if (txtBuscar.getText().isEmpty()) {
+            inicializarTabla();
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tbMedico.getModel();
+        model.setRowCount(0);
+
+        for (Medico medico : CitaSalud.medicos) {
+            if (medico.getDni()
+                .contains(txtBuscar.getText())) {
+                    Date fechaActual = new Date();
+                    long diferenciaMilisegundos = fechaActual.getTime() - medico.getFechaNacimiento().getTime();
+                    long milisegundosPorAnio = 1000L * 60 * 60 * 24 * 365;
+                    long edadEnAnios = diferenciaMilisegundos / milisegundosPorAnio;
+
+                    Object[] fila = { 
+                        medico.getDni(), 
+                        medico.getNombre(), 
+                        medico.getApellido(),
+                        medico.getEmail(),
+                        edadEnAnios
+                    };
+                model.addRow(fila);
+            }
+        }
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Encabezado;
@@ -482,10 +532,12 @@ public class JPanelMedico extends javax.swing.JPanel {
     private javax.swing.JLabel lblDni;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblFechaNacimiento;
+    private javax.swing.JLabel lblIconBuscar;
     private javax.swing.JLabel lblNombres;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTable tbMedico;
     private javax.swing.JTextField txtApellidos;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFechaNacimiento;
