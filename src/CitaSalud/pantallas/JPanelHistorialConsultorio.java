@@ -1,13 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package CitaSalud.pantallas;
+
+import CitaSalud.CitaSalud;
+import CitaSalud.Entidades.Cita;
+import CitaSalud.Entidades.Consultorio;
+import CitaSalud.Entidades.Medico;
+import CitaSalud.Entidades.Paciente;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author sande
+ * @author Andres
  */
 public class JPanelHistorialConsultorio extends javax.swing.JPanel {
 
@@ -16,6 +18,27 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
      */
     public JPanelHistorialConsultorio() {
         initComponents();
+    }
+
+    private void inicializarTabla() {
+        DefaultTableModel model = (DefaultTableModel) tbConsultorio.getModel();
+        model.setRowCount(0);
+
+        for (Consultorio consultorio : CitaSalud.consultorios) {
+
+            Medico medico = consultorio.getCita().getMedico();
+            Paciente paciente = consultorio.getCita().getPaciente();
+            Cita cita = consultorio.getCita();
+
+            Object[] fila = {
+                medico.getNombre() + " " + medico.getApellido(),
+                cita.getFecha(),
+                consultorio.getMotivo(),
+                paciente.getNombre() + " " + paciente.getApellido()
+            };
+
+            model.addRow(fila);
+        }
     }
 
     /**
@@ -85,13 +108,15 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
         btnBuscar.setBackground(new java.awt.Color(153, 204, 255));
         btnBuscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         tbConsultorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Médico", "Fecha", "Consulta", "Paciente"
@@ -292,6 +317,37 @@ public class JPanelHistorialConsultorio extends javax.swing.JPanel {
                         .addGap(92, 92, 92))))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+
+        if (txtBuscar.getText().isEmpty()) {
+            inicializarTabla();
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tbConsultorio.getModel();
+        model.setRowCount(0);
+
+        for (Consultorio consultorio : CitaSalud.consultorios) {
+            if (consultorio.getCita().getPaciente().getDni().
+                    equals(txtBuscar.getText())) {
+
+                Medico medico = consultorio.getCita().getMedico();
+                Paciente paciente = consultorio.getCita().getPaciente();
+                Cita cita = consultorio.getCita();
+
+                Object[] fila = {
+                    medico.getNombre() + " " + medico.getApellido(),
+                    cita.getFecha(),
+                    consultorio.getMotivo(),
+                    paciente.getNombre() + " " + paciente.getApellido()
+                };
+                
+                model.addRow(fila);
+            }
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
