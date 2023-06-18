@@ -20,6 +20,9 @@ public class JFrameImprimir extends javax.swing.JFrame {
      */
     public JFrameImprimir() {
         initComponents();
+        this.setResizable(false);
+
+
     }
 
     /**
@@ -30,12 +33,14 @@ public class JFrameImprimir extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         btnImprimir = new javax.swing.JButton();
-        jPanelImpreso2 = new CitaSalud.CriterioPanel.JPanelImpreso();
         btnCancelar = new javax.swing.JButton();
+        jPanelImpreso1 = new CitaSalud.CriterioPanel.JPanelImpreso();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("false"), this, org.jdesktop.beansbinding.BeanProperty.create("resizable"));
+        bindingGroup.addBinding(binding);
 
         btnImprimir.setText("Imprimir");
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
@@ -58,10 +63,10 @@ public class JFrameImprimir extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanelImpreso2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanelImpreso1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnImprimir)))
@@ -70,7 +75,7 @@ public class JFrameImprimir extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelImpreso2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelImpreso1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnImprimir)
@@ -78,30 +83,32 @@ public class JFrameImprimir extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pack();
+        bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
 
         PrinterJob job = PrinterJob.getPrinterJob();
 
-        job.setPrintable(jPanelImpreso2);
-        
+        job.setPrintable(jPanelImpreso1);
+
         if (job.printDialog()) {
             try {
                 job.print();
             } catch (PrinterException ex) {
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "La impresion se cancelo");
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-       
+
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+   
 
     /**
      * @param args the command line arguments
@@ -141,6 +148,7 @@ public class JFrameImprimir extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnImprimir;
-    private CitaSalud.CriterioPanel.JPanelImpreso jPanelImpreso2;
+    private CitaSalud.CriterioPanel.JPanelImpreso jPanelImpreso1;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
