@@ -5,8 +5,6 @@ import CitaSalud.Entidades.Area;
 import CitaSalud.Entidades.Cita;
 import CitaSalud.Entidades.Medico;
 import CitaSalud.Entidades.Paciente;
-import java.awt.BorderLayout;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -376,6 +374,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         btnConsultorio.setMaximumSize(new java.awt.Dimension(240, 40));
         btnConsultorio.setMinimumSize(new java.awt.Dimension(240, 40));
         btnConsultorio.setPreferredSize(new java.awt.Dimension(240, 40));
+        btnConsultorio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnConsultorioMouseClicked(evt);
+            }
+        });
 
         lblIconConsultorio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIconConsultorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/consultorio32.png"))); // NOI18N
@@ -690,10 +693,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
             .addGroup(MenuLayout.createSequentialGroup()
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnMedicamento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCita, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVisualizar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnMedicamento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCita, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVisualizar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnFarmacia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -871,6 +873,18 @@ public class JFramePrincipal extends javax.swing.JFrame {
          Ventana.revalidate();
          Ventana.repaint();
     }//GEN-LAST:event_btnFarmaciaMouseClicked
+
+    private void btnConsultorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultorioMouseClicked
+        // TODO add your handling code here:
+        JPanelConsultorio pConsultorio = new JPanelConsultorio();
+        pConsultorio.setSize(1200, 900);
+        pConsultorio.setLocation(0, 0);
+        
+        Ventana.removeAll();
+        Ventana.add(pConsultorio);
+        Ventana.revalidate();
+        Ventana.repaint();
+    }//GEN-LAST:event_btnConsultorioMouseClicked
 
     /**
      * @param args the command line arguments

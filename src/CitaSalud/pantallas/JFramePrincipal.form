@@ -82,11 +82,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="btnSalir" alignment="0" max="32767" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="btnMedicamento" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnCita" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnVisualizar" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btnMedicamento" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnCita" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnVisualizar" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnFarmacia" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -566,6 +564,9 @@
               <Dimension value="[240, 40]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnConsultorioMouseClicked"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">

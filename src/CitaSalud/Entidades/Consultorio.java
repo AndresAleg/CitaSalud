@@ -1,11 +1,13 @@
 package CitaSalud.Entidades;
 
+import java.util.List;
+
 public class Consultorio {
    private Cita cita;
    private String motivo;
    private String sintoma;
    private String diagnostico;
-   private String medicacion;
+   private List<Medicamento> medicamentos;
 
     /**
      * @return the cita
@@ -63,25 +65,11 @@ public class Consultorio {
         this.diagnostico = diagnostico;
     }
 
-    /**
-     * @return the medicacion
-     */
-    public String getMedicacion() {
-        return medicacion;
+    public List<Medicamento> getMedicamentos() {
+        return medicamentos;
     }
 
-    /**
-     * @param medicacion the medicacion to set
-     */
-    public void setMedicacion(String medicacion) {
-        this.medicacion = medicacion;
-    }
-
-    public String getNombre() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public String getApellido() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setMedicamentos(List<Medicamento> medicamentos) {
+        this.medicamentos = medicamentos;
     }
 }
