@@ -6,7 +6,10 @@
 package CitaSalud.pantallas;
 
 import CitaSalud.CitaSalud;
+import CitaSalud.Entidades.Cita;
 import CitaSalud.Entidades.Medico;
+import java.awt.event.ItemEvent;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,15 +23,17 @@ public class JPanelVisualizar extends javax.swing.JPanel {
     public JPanelVisualizar() {
         initComponents();
         inicializarComboBox();
+        inicializarTabla();
     }
 
     private void inicializarComboBox() {
         cbMedico.removeAllItems();
-        
+
         for (Medico medico : CitaSalud.medicos) {
             cbMedico.addItem(medico.getNombre());
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,6 +57,11 @@ public class JPanelVisualizar extends javax.swing.JPanel {
         lblNombres.setText("FECHA:");
 
         txtFecha.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtFecha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFechaKeyReleased(evt);
+            }
+        });
 
         btnBuscar.setBackground(new java.awt.Color(255, 204, 204));
         btnBuscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -125,6 +135,16 @@ public class JPanelVisualizar extends javax.swing.JPanel {
 
         cbMedico.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         cbMedico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbMedico.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbMedicoItemStateChanged(evt);
+            }
+        });
+        cbMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMedicoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -171,14 +191,124 @@ public class JPanelVisualizar extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void inicializarTabla() {
+
+        DefaultTableModel model = (DefaultTableModel) tbVisual.getModel();
+        model.setRowCount(0);
+
+        for (Cita cita : CitaSalud.citas) {
+
+            if (!cita.getAtendido()) {
+                Object[] fila = {
+                    cita.getCodigo(),
+                    cita.getPaciente().getNombre() + " " + cita.getPaciente().getApellido(),
+                    cita.getArea().getNombre(),
+                    cita.getFecha(),
+                    cita.getHora(),
+                    cita.getMedico().getNombre() + " " + cita.getMedico().getApellido()
+                };
+                model.addRow(fila);
+            }
+        }
+
+    }
+
+    protected void buscarFecha() {
+        DefaultTableModel model = (DefaultTableModel) tbVisual.getModel();
+        model.setRowCount(0);
+
+        for (Cita nav : CitaSalud.citas) {
+            if (nav.getFecha().toLowerCase().contains(txtFecha.getText().toLowerCase())) {
+                Object[] fila = {
+                    nav.getCodigo(),
+                    nav.getPaciente().getNombre() + " " + nav.getPaciente().getApellido(),
+                    nav.getArea().getNombre(),
+                    nav.getFecha(),
+                    nav.getHora(),
+                    nav.getMedico().getNombre() + " " + nav.getMedico().getApellido()
+                };
+                model.addRow(fila);
+            }
+        }
+        // Asignar el modeloTabla a tu JTable
+        tbVisual.setModel(model);
+    }
+
+    private void buscarMedico() {
+        DefaultTableModel model = (DefaultTableModel) tbVisual.getModel();
+        model.setRowCount(0);
+
+        for (Cita nav : CitaSalud.citas) {
+            if (nav.getMedico().getNombre().toLowerCase().contains(cbMedico.getSelectedItem().toString().toLowerCase())) {
+                Object[] fila = {
+                    nav.getCodigo(),
+                    nav.getPaciente().getNombre() + " " + nav.getPaciente().getApellido(),
+                    nav.getArea().getNombre(),
+                    nav.getFecha(),
+                    nav.getHora(),
+                    nav.getMedico().getNombre() + " " + nav.getMedico().getApellido()
+                };
+                model.addRow(fila);
+            }
+        }
+    }
+
+    protected void buscarMedicoYFecha() {
+        DefaultTableModel model = (DefaultTableModel) tbVisual.getModel();
+        model.setRowCount(0);
+
+        String medicoSeleccionado = cbMedico.getSelectedItem().toString().toLowerCase();
+        String fechaBuscada = txtFecha.getText().toLowerCase();
+
+        for (Cita nav : CitaSalud.citas) {
+            String nombreMedico = nav.getMedico().getNombre().toLowerCase();
+            String fechaCita = nav.getFecha().toLowerCase();
+
+            if (nombreMedico.contains(medicoSeleccionado) && fechaCita.contains(fechaBuscada)) {
+                Object[] fila = {
+                    nav.getCodigo(),
+                    nav.getPaciente().getNombre() + " " + nav.getPaciente().getApellido(),
+                    nav.getArea().getNombre(),
+                    nav.getFecha(),
+                    nav.getHora(),
+                    nav.getMedico().getNombre() + " " + nav.getMedico().getApellido()
+                };
+                model.addRow(fila);
+            }
+        }
+
+        // Asignar el modeloTabla a tu JTable
+        tbVisual.setModel(model);
+    }
+
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-       
+
+        buscarMedicoYFecha();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tbVisualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbVisualMouseClicked
-      
-        
+
+
     }//GEN-LAST:event_tbVisualMouseClicked
+
+    private void txtFechaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaKeyReleased
+
+        buscarFecha();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaKeyReleased
+
+    private void cbMedicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMedicoItemStateChanged
+
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            buscarMedico();
+        }
+
+    }//GEN-LAST:event_cbMedicoItemStateChanged
+
+    private void cbMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMedicoActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbMedicoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
