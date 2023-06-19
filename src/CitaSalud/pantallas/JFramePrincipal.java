@@ -4,6 +4,7 @@ import CitaSalud.CitaSalud;
 import CitaSalud.Entidades.Area;
 import CitaSalud.Entidades.Cita;
 import CitaSalud.Entidades.Consultorio;
+import CitaSalud.Entidades.Medicamento;
 import CitaSalud.Entidades.Medico;
 import CitaSalud.Entidades.Paciente;
 
@@ -25,7 +26,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         CitaSalud.medicos = Medico.cargarArchivoDeTexto();
         CitaSalud.pacientes = Paciente.cargarArchivoDeTexto();
         CitaSalud.citas = Cita.cargarArchivoDeTexto();
-        CitaSalud.consultorios = Consultorio.cargarArchivoDeTexto();
+        CitaSalud.medicamentos = Medicamento.cargarArchivoDeTexto();
+        //CitaSalud.consultorios = Consultorio.cargarArchivoDeTexto();
         
  
         JPanelHome pHome = new JPanelHome();
@@ -134,7 +136,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
         Ventana = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1440, 900));
         setMinimumSize(new java.awt.Dimension(1440, 900));
         setUndecorated(true);
         setOpacity(0.98F);

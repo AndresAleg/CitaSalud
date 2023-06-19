@@ -5,6 +5,16 @@
  */
 package CitaSalud.Entidades;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Eusebio
@@ -43,5 +53,40 @@ public class Medicamento {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+    
+    public static List<Medicamento> cargarArchivoDeTexto() {
+        List<Medicamento> medicamentos = new ArrayList<>();
+        Path filePath = Paths.get("src/CitaSalud/Archivos/medicamentos.txt");
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] campos = linea.split(";");
+                Medicamento medicamento = new Medicamento();
+
+                medicamento.setNombre(campos[0]);
+                medicamento.setDescripcion(campos[1]);
+
+                medicamentos.add(medicamento);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return medicamentos;
+    }
+
+    public static void actualizar(List<Medicamento> medicamentos) {
+        Path filePath = Paths.get("src/CitaSalud/Archivos/medicamentos.txt");
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()))) {
+            for (Medicamento medicamento : medicamentos) {
+                writer.write(medicamento.getNombre() + ";");
+                writer.write(medicamento.getDescripcion() + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
