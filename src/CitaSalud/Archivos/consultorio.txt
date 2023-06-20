@@ -1,1 +1,1 @@
-C0000006;motivo;sintoma;diagnostico;Repriman;5,Alprazolam;4
+C0000007;FIEBRE;MAREO;COVID;

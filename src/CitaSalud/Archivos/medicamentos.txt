@@ -1,3 +1,4 @@
-Alprazolam;Es un fármaco de la familia de las benzodiacepinas
+Repriman;Asmático por analgésicos.
 Paracetamol;Conocido como acetaminofén o acetaminofeno
 Repriman;Asmático por analgésicos.
+ ibuprofeno;ayuda a reducir la fiebre 
