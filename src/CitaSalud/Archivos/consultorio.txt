@@ -1,1 +1,3 @@
-C0000007;FIEBRE;MAREO;COVID;
+C0000001;motivo;sintoma;diagnostico;Paracetamol,5;Repriman,3
+C0000002;primera consulta;aca estan los sintomas;el diagnostico;Paracetamol,5;Simvastatina,4;Escitalopram,3;Ibuprofeno,4;Metformina,5;Warfarina,6
+C0000003;primera consulta;sintomas;diagnostico;Ibuprofeno,6;Metformina,5;Warfarina,4
