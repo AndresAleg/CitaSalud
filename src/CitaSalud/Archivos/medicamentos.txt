@@ -1,4 +1,23 @@
-Repriman;Asmático por analgésicos.
 Paracetamol;Conocido como acetaminofén o acetaminofeno
 Repriman;Asmático por analgésicos.
- ibuprofeno;ayuda a reducir la fiebre 
+Ibuprofeno;Antiinflamatorio y analgésico.
+Amoxicilina;Antibiótico de amplio espectro.
+Omeprazol;Inhibidor de la bomba de protones.
+Loratadina;Antihistamínico para alergias.
+Salbutamol;Broncodilatador para asma.
+Metformina;Medicamento antidiabético.
+Fluoxetina;Antidepresivo de la clase ISRS.
+Atorvastatina;Estatina para reducir el colesterol.
+Aspirina;Analgésico, antiinflamatorio y antipirético.
+Simvastatina;Medicamento para reducir el colesterol.
+Escitalopram;Antidepresivo y ansiolítico.
+Diazepam;Ansiolítico y sedante.
+Insulina;Hormona para controlar el azúcar en la sangre.
+Lorazepam;Ansiolítico y sedante.
+Losartán;Medicamento para tratar la hipertensión.
+Metronidazol;Antibiótico y antiprotozoario.
+Hidroclorotiazida;Diurético para tratar la hipertensión.
+Gabapentina;Antiepiléptico y analgésico neuropático.
+Warfarina;Anticoagulante para prevenir la formación de coágulos.
+Cetirizina;Antihistamínico para aliviar síntomas alérgicos.
+Sertralina;Antidepresivo y ansiolítico.

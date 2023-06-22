@@ -27,7 +27,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         CitaSalud.pacientes = Paciente.cargarArchivoDeTexto();
         CitaSalud.citas = Cita.cargarArchivoDeTexto();
         CitaSalud.medicamentos = Medicamento.cargarArchivoDeTexto();
-        //CitaSalud.consultorios = Consultorio.cargarArchivoDeTexto();
+        CitaSalud.consultorios = Consultorio.cargarArchivoDeTexto();
         
  
         JPanelHome pHome = new JPanelHome();

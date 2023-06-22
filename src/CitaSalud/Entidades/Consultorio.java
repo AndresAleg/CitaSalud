@@ -142,7 +142,7 @@ public class Consultorio {
                     writer.write(medicamento.toString());
 
                     if (i < medicamentos.size() - 1) {
-                        writer.write(",");
+                        writer.write(";");
                     }
                 }
                 writer.write(System.lineSeparator());

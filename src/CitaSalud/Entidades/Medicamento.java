@@ -28,7 +28,7 @@ public class Medicamento {
     
     @Override
     public String toString() {
-        return nombre + ";" + cantidad;
+        return nombre + "," + cantidad;
     }
 
     public String getNombre() {
