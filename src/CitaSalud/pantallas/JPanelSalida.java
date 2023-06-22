@@ -5,9 +5,15 @@
  */
 package CitaSalud.pantallas;
 
+import CitaSalud.CitaSalud;
+import CitaSalud.Entidades.Paciente;
+import CitaSalud.Entidades.Salida;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author La Clave
+ * @author Ronaldo
  */
 public class JPanelSalida extends javax.swing.JPanel {
 
@@ -16,8 +22,34 @@ public class JPanelSalida extends javax.swing.JPanel {
      */
     public JPanelSalida() {
         initComponents();
+        inicializarTabla();
     }
+    
+    private void inicializarTabla() {
+        DefaultTableModel model = (DefaultTableModel) tbSalida.getModel();
+        model.setRowCount(0);
 
+        for (Salida salida : CitaSalud.salidas) {
+            Object[] fila = { salida.getNombreDeDoctor(), salida.getFechaSalida()};
+            model.addRow(fila);
+        }
+    }
+    
+    private boolean existeSalida(String nombre) {
+        for (Salida salida : CitaSalud.salidas) {
+            if (salida.getNombreDeDoctor().equals(nombre)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private void limpiarControles() {
+        txtCelularDePaciente.setText("");
+        txtNombreDeDoctor.setText("");
+        txtFechaSalida.setText("");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,7 +59,7 @@ public class JPanelSalida extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtPaciente = new javax.swing.JTextField();
+        txtCelularDePaciente = new javax.swing.JTextField();
         lblDescripcion = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbSalida = new javax.swing.JTable();
@@ -39,9 +71,11 @@ public class JPanelSalida extends javax.swing.JPanel {
         lblNombre = new javax.swing.JLabel();
         txtNombreDeDoctor = new javax.swing.JTextField();
         lblDescripcion1 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JTextField();
+        txtFechaSalida = new javax.swing.JTextField();
+        lblIconBuscar = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
 
-        txtPaciente.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtCelularDePaciente.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
         lblDescripcion.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblDescripcion.setText("NOMBRE DE DOCTOR:");
@@ -133,12 +167,21 @@ public class JPanelSalida extends javax.swing.JPanel {
         });
 
         lblNombre.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblNombre.setText("PACIENTE:");
+        lblNombre.setText("CELULAR DE PACIENTE:");
 
         lblDescripcion1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblDescripcion1.setText("FECHA:");
 
-        txtFecha.setText("DD/MM/YYYY");
+        txtFechaSalida.setText("DD/MM/YYYY");
+
+        lblIconBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/buscar32.png"))); // NOI18N
+
+        txtBuscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -154,8 +197,8 @@ public class JPanelSalida extends javax.swing.JPanel {
                                 .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtFecha))
-                        .addGap(132, 132, 132))
+                            .addComponent(txtFechaSalida))
+                        .addGap(135, 135, 135))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblDescripcion1)
@@ -164,23 +207,35 @@ public class JPanelSalida extends javax.swing.JPanel {
                                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(lblDescripcion)
-                                .addComponent(txtPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                                .addComponent(txtCelularDePaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
                                 .addComponent(lblNombre)
                                 .addComponent(txtNombreDeDoctor)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblIconBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(221, 221, 221))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNombre)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(96, 96, 96)
+                                .addComponent(lblNombre))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblIconBuscar)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCelularDePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblDescripcion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -188,33 +243,145 @@ public class JPanelSalida extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(lblDescripcion1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnRegistrar)
                             .addComponent(btnEditar))
                         .addGap(19, 19, 19)
-                        .addComponent(btnEliminar))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 146, Short.MAX_VALUE))
+                        .addComponent(btnEliminar)
+                        .addGap(0, 146, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSalidaMouseClicked
-        
+        int filaSeleccionada = tbSalida.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+            Object valor = tbSalida.getValueAt(filaSeleccionada, 0);
+
+            Salida medicamentoEncontrado = null;
+
+            for (Salida salida : CitaSalud.salidas) {
+                if (salida.getNombreDeDoctor().equals(valor)) {
+                    medicamentoEncontrado = salida;
+                    break;
+                }
+            }
+            txtCelularDePaciente.setText(medicamentoEncontrado.getPaciente().getCelular());
+            txtNombreDeDoctor.setText(medicamentoEncontrado.getNombreDeDoctor());
+            txtFechaSalida.setText(medicamentoEncontrado.getFechaSalida());
+        }
     }//GEN-LAST:event_tbSalidaMouseClicked
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
+        String celularDePaciente = txtCelularDePaciente.getText();
+        String nombreDeDoctor = txtNombreDeDoctor.getText();
+        String fechaSalida = txtFechaSalida.getText();
+        
+        //Buscar Paciente por celular
+        Paciente pacienteEnecontrado = null;
+        for(int i=0;i<CitaSalud.pacientes.size()-1;i++){
+        if(CitaSalud.pacientes.get(i).getCelular() == celularDePaciente){
+            pacienteEnecontrado = CitaSalud.pacientes.get(i);
+        }
+    }
+
+        if (nombreDeDoctor.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un una fecha.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (existeSalida(fechaSalida)) {
+            JOptionPane.showMessageDialog(this, "La fecha ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Salida nuevaSalida = new Salida();
+            nuevaSalida.setNombreDeDoctor(nombreDeDoctor);
+            nuevaSalida.setFechaSalida(fechaSalida);
+
+            CitaSalud.salidas.add(nuevaSalida);
+            Salida.actualizar(CitaSalud.salidas);
+            inicializarTabla(); 
+            limpiarControles();
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         
+        int indiceFilaSeleccionada = tbSalida.getSelectedRow();
+
+        if (indiceFilaSeleccionada >= 0) {
+            String celularDePaciente = txtCelularDePaciente.getText();
+            String nombreDeDoctor = txtNombreDeDoctor.getText();
+            String fechaSalida = txtFechaSalida.getText();
+            
+            Paciente paciente = null;
+            for(int i=0;i<CitaSalud.pacientes.size()-1;i++){
+                if(CitaSalud.pacientes.get(i).getCelular() == celularDePaciente){
+                    paciente = CitaSalud.pacientes.get(i);
+                    break;
+                }
+            }
+            
+
+            Salida salidaSeleccionada = CitaSalud.salidas.get(indiceFilaSeleccionada);
+            salidaSeleccionada.setPaciente(paciente);
+            salidaSeleccionada.setNombreDeDoctor(nombreDeDoctor);
+            salidaSeleccionada.setFechaSalida(fechaSalida);
+            Salida.actualizar(CitaSalud.salidas);
+            inicializarTabla();
+            limpiarControles();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona una fila.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-       
+       String fechaSalida = txtFechaSalida.getText();
+
+        if (existeSalida(fechaSalida)) {
+            int opcion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de eliminar la salida?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                for (Salida salida : CitaSalud.salidas) {
+                    if (salida.getNombreDeDoctor().equals(fechaSalida)) {
+                        CitaSalud.salidas.remove(salida);
+                        break;
+                    }
+                }
+                Salida.actualizar(CitaSalud.salidas);
+                inicializarTabla();
+                limpiarControles();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró la salida.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        // TODO add your handling code here:
+        if (txtBuscar.getText().isEmpty()) {
+            inicializarTabla();
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tbSalida.getModel();
+        model.setRowCount(0);
+
+        for (Salida salida : CitaSalud.salidas) {
+            if (salida.getFechaSalida()
+                .toLowerCase()
+                .contains(txtBuscar.getText()
+                    .toLowerCase())) {
+                Object[] fila = {salida.getPaciente(), salida.getNombreDeDoctor(), salida.getFechaSalida()};
+                model.addRow(fila);
+            }
+        }
+    }//GEN-LAST:event_txtBuscarKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -225,11 +392,13 @@ public class JPanelSalida extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblDescripcion1;
+    private javax.swing.JLabel lblIconBuscar;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTable tbSalida;
-    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtCelularDePaciente;
+    private javax.swing.JTextField txtFechaSalida;
     private javax.swing.JTextField txtNombreDeDoctor;
-    private javax.swing.JTextField txtPaciente;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,7 +36,7 @@ public class JPanelMedicamento extends javax.swing.JPanel {
             model.addRow(fila);
         }
     }
-    
+     
     private boolean existeMedicamento(String nombre) {
         for (Medicamento medicamento : CitaSalud.medicamentos) {
             if (medicamento.getNombre().equals(nombre)) {

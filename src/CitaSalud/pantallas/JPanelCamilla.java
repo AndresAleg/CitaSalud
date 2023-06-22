@@ -5,9 +5,15 @@
  */
 package CitaSalud.pantallas;
 
+import CitaSalud.CitaSalud;
+import CitaSalud.Entidades.Camilla;
+import CitaSalud.Entidades.Paciente;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author La Clave
+ * @author Ronaldo
  */
 public class JPanelCamilla extends javax.swing.JPanel {
 
@@ -16,7 +22,35 @@ public class JPanelCamilla extends javax.swing.JPanel {
      */
     public JPanelCamilla() {
         initComponents();
+        inicializarTabla();
     }
+    
+     private void inicializarTabla() {
+        DefaultTableModel model = (DefaultTableModel) tbCamilla.getModel();
+        model.setRowCount(0);
+
+        for (Camilla camilla : CitaSalud.camillas) {
+            Object[] fila = { camilla.getPaciente(),
+                camilla.getNumeroDeCamilla(),camilla.getTipo() };
+            model.addRow(fila);
+        }
+    }
+     
+     private boolean existeCamilla(String numeroDeCamilla) {
+        for (Camilla camilla : CitaSalud.camillas) {
+            if (camilla.getNumeroDeCamilla().equals(numeroDeCamilla)) {
+                return true;
+            }
+        }
+        return false;
+    }
+     
+     private void limpiarControles() {
+        txtCelularDePaciente.setText("");
+        txtNumeroDeCamilla.setText("");
+        txtTipo.setText("");
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,11 +71,13 @@ public class JPanelCamilla extends javax.swing.JPanel {
         lblDescripcion = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbCamilla = new javax.swing.JTable();
-        txtPaciente = new javax.swing.JTextField();
+        txtCelularDePaciente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         lblDescripcion1 = new javax.swing.JLabel();
         txtNumeroDeCamilla = new javax.swing.JTextField();
         txtTipo = new javax.swing.JTextField();
+        lblIconBuscar = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
 
         btnRegistrar.setBackground(new java.awt.Color(153, 255, 153));
         btnRegistrar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -91,7 +127,7 @@ public class JPanelCamilla extends javax.swing.JPanel {
         });
 
         lblNombre.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblNombre.setText("PACIENTE:");
+        lblNombre.setText("CELULAR DE PACIENTE:");
 
         lblDescripcion.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblDescripcion.setText("NUMERO DE CAMILLA:");
@@ -140,6 +176,15 @@ public class JPanelCamilla extends javax.swing.JPanel {
         lblDescripcion1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblDescripcion1.setText("TIPO:");
 
+        lblIconBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CitaSalud/Imagenes/buscar32.png"))); // NOI18N
+
+        txtBuscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -149,33 +194,35 @@ public class JPanelCamilla extends javax.swing.JPanel {
                 .addGap(102, 102, 102)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblDescripcion)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtTipo)
-                                .addGap(109, 109, 109))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblDescripcion1)
-                                .addGap(406, 406, 406))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblDescripcion1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNombre)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtPaciente)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(208, 208, 208)
-                                            .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(lblDescripcion)
-                                    .addComponent(txtNumeroDeCamilla, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46))))
+                                .addGap(107, 107, 107)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCelularDePaciente, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(208, 208, 208)
+                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNumeroDeCamilla)
+                            .addComponent(lblNombre)
+                            .addComponent(txtTipo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblIconBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(242, 242, 242))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,35 +233,40 @@ public class JPanelCamilla extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblDescripcion)
-                        .addGap(4, 4, 4)
+                        .addComponent(txtCelularDePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblIconBuscar)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDescripcion)
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtNumeroDeCamilla, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(lblDescripcion1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)
+                                .addGap(19, 19, 19))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblDescripcion1)
+                                .addGap(11, 11, 11)))
                         .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnRegistrar)
-                            .addComponent(btnEditar)))
+                            .addComponent(btnEditar))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnEliminar)
-                .addGap(0, 209, Short.MAX_VALUE))
+                .addGap(0, 169, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1223, Short.MAX_VALUE)
+            .addGap(0, 1379, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -235,25 +287,134 @@ public class JPanelCamilla extends javax.swing.JPanel {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:  
         
+        
+        String celularDePaciente = txtCelularDePaciente.getText();
+        String numeroDeCamilla = txtNumeroDeCamilla.getText();
+        String tipo = txtTipo.getText();
+        
+        //Buscar Paciente por celular
+        Paciente pacienteEnecontrado = null;
+        for(int i=0;i<CitaSalud.pacientes.size()-1;i++){
+            if(CitaSalud.pacientes.get(i).getCelular() == celularDePaciente){
+                pacienteEnecontrado = CitaSalud.pacientes.get(i);
+                break;
+            }
+        }
+        
+        if (numeroDeCamilla.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar una camilla.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (existeCamilla(numeroDeCamilla)) {
+            JOptionPane.showMessageDialog(this, "La Camilla ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Camilla nuevaCamilla = new Camilla();
+            nuevaCamilla.setPaciente(pacienteEnecontrado);
+            nuevaCamilla.setNumeroDeCamilla(numeroDeCamilla);
+            nuevaCamilla.setTipo(tipo);
+
+            CitaSalud.camillas.add(nuevaCamilla);
+            Camilla.actualizar(CitaSalud.camillas);
+            inicializarTabla(); 
+            limpiarControles();
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-      
-        
+      int indiceFilaSeleccionada = tbCamilla.getSelectedRow();
+
+        if (indiceFilaSeleccionada >= 0) {
+            
+            String celularDePaciente = txtCelularDePaciente.getText();
+            String camilla = txtNumeroDeCamilla.getText();
+            String tipo = txtTipo.getText();
+            
+            //Buscar paciente por celular
+            Paciente paciente = null;
+            for(int i=0;i<CitaSalud.pacientes.size()-1;i++){
+                if(CitaSalud.pacientes.get(i).getCelular() == celularDePaciente){
+                    paciente = CitaSalud.pacientes.get(i);
+                    break;
+                }
+            }
+
+            Camilla camillaSeleccionada = CitaSalud.camillas.get(indiceFilaSeleccionada);
+            camillaSeleccionada.setPaciente(paciente);
+            camillaSeleccionada.setNumeroDeCamilla(camilla);
+            camillaSeleccionada.setTipo(tipo);
+            Camilla.actualizar(CitaSalud.camillas);
+            inicializarTabla();
+            limpiarControles();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona una fila.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        
-       
+        String camillaNumero = txtNumeroDeCamilla.getText();
+
+        if (existeCamilla(camillaNumero)) {
+            int opcion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de eliminar la camilla?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                for (Camilla camilla : CitaSalud.camillas) {
+                    if (camilla.getNumeroDeCamilla().equals(camilla)) {
+                        CitaSalud.camillas.remove(camilla);
+                        break;
+                    }
+                }
+                Camilla.actualizar(CitaSalud.camillas);
+                inicializarTabla();
+                limpiarControles();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró la camilla.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void tbCamillaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCamillaMouseClicked
         // TODO add your handling code here:
-        
-        
+        int filaSeleccionada = tbCamilla.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+            Object valor = tbCamilla.getValueAt(filaSeleccionada, 0);
+
+            Camilla camillaEncontrada = null;
+
+            for (Camilla camilla : CitaSalud.camillas) {
+                if (camilla.getNumeroDeCamilla().equals(valor)) {
+                    camillaEncontrada = camilla;
+                    break;
+                }
+            }
+            
+            txtCelularDePaciente.setText(camillaEncontrada.getPaciente().getCelular());
+            txtNumeroDeCamilla.setText(camillaEncontrada.getNumeroDeCamilla());
+            txtTipo.setText(camillaEncontrada.getTipo());
+            
+        }
     }//GEN-LAST:event_tbCamillaMouseClicked
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        // TODO add your handling code here:
+        if (txtBuscar.getText().isEmpty()) {
+            inicializarTabla();
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tbCamilla.getModel();
+        model.setRowCount(0);
+
+        for (Camilla camilla : CitaSalud.camillas) {
+            if (camilla.getNumeroDeCamilla()
+                .toLowerCase()
+                .contains(txtBuscar.getText()
+                    .toLowerCase())) {
+                Object[] fila = { camilla.getPaciente(),camilla.getNumeroDeCamilla(), camilla.getTipo() };
+                model.addRow(fila);
+            }
+        }
+    }//GEN-LAST:event_txtBuscarKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -266,11 +427,13 @@ public class JPanelCamilla extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblDescripcion1;
+    private javax.swing.JLabel lblIconBuscar;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTable tbCamilla;
+    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtCelularDePaciente;
     private javax.swing.JTextField txtNumeroDeCamilla;
-    private javax.swing.JTextField txtPaciente;
     private javax.swing.JTextField txtTipo;
     // End of variables declaration//GEN-END:variables
 }
