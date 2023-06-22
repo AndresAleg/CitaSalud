@@ -5,6 +5,16 @@
  */
 package CitaSalud.Entidades;
 
+import CitaSalud.CitaSalud;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author USER
@@ -30,13 +40,52 @@ public class Farmacia {
     public void setConsultorio(Consultorio consultorio) {
         this.consultorio = consultorio;
     }
+    
+    public static List<Farmacia> cargarArchivoDeTexto() {
+        List<Farmacia> farmacias = new ArrayList<>();
+        Path filePath = Paths.get("src/CitaSalud/Archivos/farmacias.txt");
 
-    public boolean getAtendido() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] campos = linea.split(";");
+                Farmacia farmacia = new Farmacia();
+
+                for (Paciente paciente : CitaSalud.pacientes) {
+                    
+                    if (paciente.getDni().contains(campos[0])) {
+                        farmacia.setPaciente(paciente);
+                        break;
+                    }
+                }
+                
+                for (Consultorio consultorio : CitaSalud.consultorios) {
+                   
+                    if (consultorio.getCita().getCodigo().contains(campos[1])) {
+                        farmacia.setConsultorio(consultorio);
+                        break;
+                    }
+                }
+                farmacias.add(farmacia);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return farmacias;
     }
 
-    public Object getNombre() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static void actualizar(List<Farmacia> farmacias) {
+        Path filePath = Paths.get("src/CitaSalud/Archivos/farmacias.txt");
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath.toFile()))) {
+            for (Farmacia farmacia : farmacias) {
+                writer.write(farmacia.getPaciente().getDni() + ";");
+                writer.write(farmacia.getConsultorio().getCita().getCodigo() + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 }

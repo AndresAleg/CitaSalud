@@ -37,7 +37,6 @@ public class JPanelFarmacia extends javax.swing.JPanel {
     public JPanelFarmacia() {
         initComponents();
         inicializarTabla();
-        
     }
       
     private void inicializarTabla() {
@@ -291,8 +290,10 @@ public class JPanelFarmacia extends javax.swing.JPanel {
         if (pacienteEncontrado != null && consultorioEncontrado != null) {
             
             for (Farmacia farmacia : CitaSalud.farmacias) {
-                if (farmacia.getPaciente().equals(pacienteEncontrado) &&
-                        farmacia.getConsultorio().equals(consultorioEncontrado)) {
+                if (farmacia.getPaciente().getDni()
+                        .equals(pacienteEncontrado.getDni())&&
+                        farmacia.getConsultorio().getCita().getCodigo()
+                                .equals(consultorioEncontrado.getCita().getCodigo())) {
                     JOptionPane.showMessageDialog(this, "Esta farmacia ya ha estado registrado antes.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
@@ -302,7 +303,7 @@ public class JPanelFarmacia extends javax.swing.JPanel {
             nuevaFarmacia.setPaciente(pacienteEncontrado);
             nuevaFarmacia.setConsultorio(consultorioEncontrado);
             CitaSalud.farmacias.add(nuevaFarmacia);
-            
+            Farmacia.actualizar(CitaSalud.farmacias);
             JOptionPane.showMessageDialog(this, "Se ha registrado correctamente en Farmacia.", "Información", JOptionPane.INFORMATION_MESSAGE);
         }
         else {

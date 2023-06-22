@@ -4,6 +4,7 @@ import CitaSalud.CitaSalud;
 import CitaSalud.Entidades.Area;
 import CitaSalud.Entidades.Cita;
 import CitaSalud.Entidades.Consultorio;
+import CitaSalud.Entidades.Farmacia;
 import CitaSalud.Entidades.Medicamento;
 import CitaSalud.Entidades.Medico;
 import CitaSalud.Entidades.Paciente;
@@ -28,6 +29,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         CitaSalud.citas = Cita.cargarArchivoDeTexto();
         CitaSalud.medicamentos = Medicamento.cargarArchivoDeTexto();
         CitaSalud.consultorios = Consultorio.cargarArchivoDeTexto();
+        CitaSalud.farmacias = Farmacia.cargarArchivoDeTexto();
         
  
         JPanelHome pHome = new JPanelHome();
@@ -959,7 +961,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         JPanelHistorialConsultorio pHistorial = new JPanelHistorialConsultorio();
         pHistorial.setSize(1200, 900);
         pHistorial.setLocation(0, 0);
-        
+            
         Ventana.removeAll();
         Ventana.add(pHistorial);
         Ventana.revalidate();
