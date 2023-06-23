@@ -906,10 +906,28 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     private void btnCamillaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCamillaMouseClicked
         // TODO add your handling code here:
+        
+        JPanelCamilla pCamilla = new JPanelCamilla();
+        pCamilla.setSize(1200, 900);
+        pCamilla.setLocation(0, 0);
+        
+        Ventana.removeAll();
+        Ventana.add(pCamilla);
+        Ventana.revalidate();
+        Ventana.repaint();
     }//GEN-LAST:event_btnCamillaMouseClicked
 
     private void btnSalidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalidaMouseClicked
         // TODO add your handling code here:
+        
+        JPanelSalida pSalida = new JPanelSalida();
+        pSalida.setSize(1200, 900);
+        pSalida.setLocation(0, 0);
+        
+        Ventana.removeAll();
+        Ventana.add(pSalida);
+        Ventana.revalidate();
+        Ventana.repaint();
     }//GEN-LAST:event_btnSalidaMouseClicked
 
     private void btnFarmaciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFarmaciaMouseClicked
