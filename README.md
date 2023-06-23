@@ -15,6 +15,15 @@ El sistema de gestión de citas médicas es una aplicación que permite programa
 - El sistema permite registrar nuevos pacientes en el sistema.
 - El sistema permite editar la información de los pacientes existentes en el sistema.
 - El sistema permite eliminar pacientes innecesarios del sistema.
+- El sistema permite registrar nuevas camillas en el sistema.
+- El sistema permite editar las camillas de los pacientes en el sistema.
+- El sistema permite eliminar las camillas en el sistema
+- El sistema permite registrar las salidas de los pacientes en el sistema.
+- El sistema permite editar las salidas de los pacientes en el sistema.
+- El sistema permite eliminar las salidas de los pacientes en el sistema.
+- El sistema permite registrar en el sistema a los pacientes.
+- El sistema permite bucar en el sistema a los pacientes.
+- El sistema permite eliminar en el sistema a los pacientes.
 
 El sistema está diseñado para ser intuitivo y fácil de usar, brindando una experiencia eficiente para los profesionales de la salud.
 
@@ -27,6 +36,12 @@ El sistema está diseñado para ser intuitivo y fácil de usar, brindando una ex
 - Registro de Pacientes: Los usuarios pueden crear y gestionar los pacientes.
 
 - Gestión de citas: Los usuarios pueden ver y cancelar sus citas existentes.
+
+- Registro de Camillas: Los usuarios pueden crear y gestionar a las camillas.
+
+- Registro de Salidas: Los usuarios pueden crear y gestionar las salidas.
+
+- Registro de Consultorio: Los usuarios pueden registrar y gestionar en el consultorio.
 
 ## Requisitos del sistema
 
