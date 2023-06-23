@@ -2,12 +2,14 @@ package CitaSalud.pantallas;
 
 import CitaSalud.CitaSalud;
 import CitaSalud.Entidades.Area;
+import CitaSalud.Entidades.Camilla;
 import CitaSalud.Entidades.Cita;
 import CitaSalud.Entidades.Consultorio;
 import CitaSalud.Entidades.Farmacia;
 import CitaSalud.Entidades.Medicamento;
 import CitaSalud.Entidades.Medico;
 import CitaSalud.Entidades.Paciente;
+import CitaSalud.Entidades.Salida;
 
 /**
  *
@@ -30,6 +32,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         CitaSalud.medicamentos = Medicamento.cargarArchivoDeTexto();
         CitaSalud.consultorios = Consultorio.cargarArchivoDeTexto();
         CitaSalud.farmacias = Farmacia.cargarArchivoDeTexto();
+        CitaSalud.camillas = Camilla.cargarArchivoDeTexto();
+        CitaSalud.salidas = Salida.cargarArchivoDeTexto();
         
  
         JPanelHome pHome = new JPanelHome();

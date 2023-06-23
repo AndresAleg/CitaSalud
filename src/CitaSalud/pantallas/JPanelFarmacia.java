@@ -107,6 +107,9 @@ public class JPanelFarmacia extends javax.swing.JPanel {
         btnRegistrar.setBounds(200, 640, 140, 31);
 
         Encabezado.setBackground(new java.awt.Color(27, 29, 61));
+        Encabezado.setMaximumSize(new java.awt.Dimension(199, 99));
+        Encabezado.setMinimumSize(new java.awt.Dimension(199, 99));
+        Encabezado.setPreferredSize(new java.awt.Dimension(199, 99));
 
         lblTitulo.setFont(new java.awt.Font("Century Gothic", 0, 60)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -117,25 +120,21 @@ public class JPanelFarmacia extends javax.swing.JPanel {
         Encabezado.setLayout(EncabezadoLayout);
         EncabezadoLayout.setHorizontalGroup(
             EncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(EncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(EncabezadoLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 1300, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(EncabezadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 1300, Short.MAX_VALUE)
+                .addContainerGap())
         );
         EncabezadoLayout.setVerticalGroup(
             EncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 121, Short.MAX_VALUE)
-            .addGroup(EncabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(EncabezadoLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(EncabezadoLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         add(Encabezado);
-        Encabezado.setBounds(0, 0, 1320, 121);
+        Encabezado.setBounds(0, 0, 1320, 99);
 
         lblNombre.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblNombre.setText("PACIENTE:");
