@@ -24,6 +24,10 @@ El sistema de gestión de citas médicas es una aplicación que permite programa
 - El sistema permite registrar en el sistema a los pacientes.
 - El sistema permite bucar en el sistema a los pacientes.
 - El sistema permite eliminar en el sistema a los pacientes.
+- El sistema permite registrar nuevas medicamento en el sistema.
+- El sistema permite editar la información de los medicamentos existentes en el sistema.
+- El sistema permite eliminar medicamento innecesarias del sistema.
+- El sistema permite registrar nuevas farmacia en el sistema.
 
 El sistema está diseñado para ser intuitivo y fácil de usar, brindando una experiencia eficiente para los profesionales de la salud.
 
